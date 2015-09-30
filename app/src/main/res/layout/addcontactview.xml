@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"
+        android:text="Please insert your contact information"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/title"
+        android:background="@color/fraunhofergreen" />
+
+    <EditText
+        android:id="@+id/nameedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_gravity="center_horizontal"
+        android:layout_toEndOf="@id/nametextview"
+        android:layout_toRightOf="@+id/nametextview"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/companymaneedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nameedittext"
+        android:layout_alignStart="@id/nameedittext"
+        android:layout_below="@+id/nameedittext"
+        android:layout_gravity="center_horizontal" />
+
+
+    <EditText
+        android:id="@+id/emailedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nameedittext"
+        android:layout_alignStart="@id/nameedittext"
+        android:layout_below="@+id/companymaneedittext"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/phoneedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nameedittext"
+        android:layout_alignStart="@id/nameedittext"
+        android:layout_below="@+id/emailedittext"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="phone" />
+
+
+    <EditText
+        android:id="@+id/addinfoedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nameedittext"
+        android:layout_alignStart="@id/nameedittext"
+        android:layout_below="@+id/phoneedittext"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:lines="3" />
+
+    <TextView
+        android:id="@+id/nametextview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/nameedittext"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/title"
+        android:gravity="center_vertical"
+        android:text="Name: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/companytextview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/companymaneedittext"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nametextview"
+        android:text="Company: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/emailtextview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/emailedittext"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/companytextview"
+        android:text="Email: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/phonetextview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/phoneedittext"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/emailtextview"
+        android:text="Phone: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <TextView
+        android:id="@+id/addinfotextview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/addinfoedittext"
+        android:layout_below="@id/phonetextview"
+        android:text="Additional Information: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:id="@+id/checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addinfotextview"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/checkbox1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:text="checkbox 1"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:text="checkbox 2"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:text="checkbox 3"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkboxes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/savecontact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/resetbuttondrawable"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/cancelcontact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/resetbuttondrawablegray"
+            android:text="Cancel" />
+    </LinearLayout>
+
+
+</RelativeLayout>

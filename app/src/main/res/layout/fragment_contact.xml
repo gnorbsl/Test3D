@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <hollowsoft.slidingdrawer.SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawercontact"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        drawer:content="@+id/contentcontact"
+        drawer:handle="@+id/handlecontact">
+
+        <TextView
+            android:id="@+id/handlecontact"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/fraunhofergreen"
+            android:gravity="center"
+            android:text="Leave Contactinformation"
+            android:textColor="@color/abc_primary_text_material_dark" />
+
+        <RelativeLayout
+            android:id="@+id/contentcontact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fraunhofergreen">
+
+            <ImageView
+                android:id="@+id/cameraicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_camera_alt_white_48dp" />
+
+
+            <TextView
+                android:id="@+id/cameratext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/cameraicon"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toEndOf="@+id/cameraicon"
+                android:layout_toRightOf="@+id/cameraicon"
+                android:background="@drawable/resetbuttondrawable"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:text="Take Picture of Businesscard"
+                android:textColor="@color/abc_primary_text_material_dark" />
+
+            <ImageView
+                android:id="@+id/contacticon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cameraicon"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_contact_phone_white_48dp" />
+
+
+            <TextView
+                android:id="@+id/addcontactinformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/contacticon"
+                android:layout_alignLeft="@+id/cameratext"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/cameratext"
+                android:layout_alignTop="@+id/contacticon"
+                android:layout_marginLeft="4dp"
+                android:layout_toEndOf="@+id/contacticon"
+                android:layout_toRightOf="@+id/contacticon"
+                android:background="@drawable/resetbuttondrawable"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:text="Add Contactinformation"
+                android:textColor="@color/abc_primary_text_material_dark" />
+
+
+        </RelativeLayout>
+
+    </hollowsoft.slidingdrawer.SlidingDrawer>
+</RelativeLayout>
