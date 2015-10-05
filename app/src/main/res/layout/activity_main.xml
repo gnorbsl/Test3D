@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/contactinfofragment"
-        android:name="izm.fraunhofer.de.phoffmn.test3d.ContactDrawerFragment"
+        android:name="izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDrawerFragment"
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -233,6 +233,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Show stored data" />
+
+    <Button
+        android:id="@+id/deleteData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/showdata"
+        android:text="delete stored data" />
 
 
 </RelativeLayout>

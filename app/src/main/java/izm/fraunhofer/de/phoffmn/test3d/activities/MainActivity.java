@@ -1,4 +1,4 @@
-package izm.fraunhofer.de.phoffmn.test3d;
+package izm.fraunhofer.de.phoffmn.test3d.activities;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +32,9 @@ import java.util.Map;
 import hollowsoft.slidingdrawer.OnDrawerCloseListener;
 import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
+import izm.fraunhofer.de.phoffmn.test3d.R;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDialogFragment;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
 import min3d.core.Object3dContainer;
 import min3d.core.RendererActivity;
 import min3d.parser.IParser;
@@ -316,10 +322,40 @@ public class MainActivity extends RendererActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
+
                 Map<String, ?> prefEntries = pref.getAll();
+
+               String[] contacts = new String[prefEntries.size()];
+
+                int i = 0;
                 for (Map.Entry<String, ?> entry : prefEntries.entrySet()) {
-                    Log.d(TAG, entry.getKey() + ": " + entry.getValue().toString());
+
+                   contacts[i] = entry.getValue().toString();
+                    i++;
                 }
+
+
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("list_dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+
+                ft.addToBackStack(null);
+
+                DialogFragment newFragment = ContactListFragment.newInstance(contacts);
+                newFragment.show(ft, "list_dialog");
+            }
+        });
+
+        Button deleteData = (Button) findViewById(R.id.deleteData);
+
+        deleteData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
+                pref.edit().clear().apply();
             }
         });
 

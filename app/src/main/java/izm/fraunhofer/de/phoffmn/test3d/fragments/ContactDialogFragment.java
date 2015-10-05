@@ -1,4 +1,4 @@
-package izm.fraunhofer.de.phoffmn.test3d;
+package izm.fraunhofer.de.phoffmn.test3d.fragments;
 
 
 import android.app.Activity;
@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import izm.fraunhofer.de.phoffmn.test3d.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +62,7 @@ public class ContactDialogFragment extends DialogFragment {
     private EditText phoneEditText;
     private EditText additionalInfo;
 
-    static ContactDialogFragment newInstance(int value) {
+    static public ContactDialogFragment newInstance(int value) {
         ContactDialogFragment f = new ContactDialogFragment();
 
         // Supply num input as an argument.
@@ -96,11 +98,16 @@ public class ContactDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(View v) {
 
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.GERMANY).format(new Date());
+
                     String additionalInfo = additionalInfoImage.getText().toString();
 
                     JSONObject obj = new JSONObject();
                     try {
-                        obj.put("addInfo", additionalInfo).put("checkbox1", checkbox1.isChecked())
+                        obj.put("timestamp", timeStamp)
+                                .put("imagepath", mCurrentPhotoPath)
+                                .put("addInfo", additionalInfo)
+                                .put("checkbox1", checkbox1.isChecked())
                                 .put("checkbox2", checkbox2.isChecked())
                                 .put("checkbox3", checkbox3.isChecked());
                     } catch (JSONException e) {
@@ -108,7 +115,7 @@ public class ContactDialogFragment extends DialogFragment {
                     }
 
 
-                    edit.putString(mCurrentPhotoPath, obj.toString());
+                    edit.putString(timeStamp, obj.toString());
                     edit.apply();
 
                     Toast.makeText(getActivity(), "SAVED IMAGE " + obj.toString(), Toast.LENGTH_LONG).show();
@@ -121,6 +128,7 @@ public class ContactDialogFragment extends DialogFragment {
                 @Override
                 public void onClick(View v) {
 
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.GERMANY).format(new Date());
                     JSONObject obj = new JSONObject();
                     try {
 
@@ -130,7 +138,8 @@ public class ContactDialogFragment extends DialogFragment {
                         String phone = phoneEditText.getText().toString();
                         String addInfo = additionalInfo.getText().toString();
 
-                        obj.put("name", name)
+                        obj.put("timestamp", timeStamp)
+                                .put("name", name)
                                 .put("company", company)
                                 .put("email", email)
                                 .put("phone", phone)
@@ -139,7 +148,7 @@ public class ContactDialogFragment extends DialogFragment {
                                 .put("checkbox2", checkbox2.isChecked())
                                 .put("checkbox3", checkbox3.isChecked());
 
-                        edit.putString(new Date().toString(), obj.toString()).apply();
+                        edit.putString(timeStamp, obj.toString()).apply();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

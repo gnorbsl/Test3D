@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_gravity="center_horizontal"
-        android:layout_toEndOf="@id/nametextview"
+        android:layout_toEndOf="@+id/nametextview"
         android:layout_toRightOf="@+id/nametextview"
         android:ems="10"
         android:inputType="textPersonName" />
