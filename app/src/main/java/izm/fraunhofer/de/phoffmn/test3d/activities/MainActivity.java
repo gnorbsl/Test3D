@@ -5,11 +5,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -20,9 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -170,6 +165,7 @@ public class MainActivity extends RendererActivity {
      */
     private void createAndStartLoadingAlertDialog() {
 
+        //TODO can be replaced with rxandroid
         this.runOnUiThread(new Runnable() {
 
             public void run() {
@@ -252,6 +248,14 @@ public class MainActivity extends RendererActivity {
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.content);
         mainLayout.addView(_glSurfaceView);
 
+        create3DNavigation(mainLayout);
+
+        createViewsAndListeners();
+
+    }
+
+    private void create3DNavigation(View mainLayout) {
+
         mainLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -294,10 +298,6 @@ public class MainActivity extends RendererActivity {
                 return true;
             }
         });
-
-
-        createViewsAndListeners();
-
     }
 
     private void createViewsAndListeners() {
@@ -321,6 +321,8 @@ public class MainActivity extends RendererActivity {
 
         Button showData = (Button) findViewById(R.id.showdata);
 
+
+        //TODO hide them somehow
         showData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

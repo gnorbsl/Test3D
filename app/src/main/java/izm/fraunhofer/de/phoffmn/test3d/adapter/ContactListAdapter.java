@@ -144,7 +144,7 @@ public class ContactListAdapter extends ArrayAdapter{
                             }
 
                             d.show();
-                           // d.getWindow().setAttributes(lp);
+                            d.getWindow().setAttributes(lp);
 
                         }
                     });
