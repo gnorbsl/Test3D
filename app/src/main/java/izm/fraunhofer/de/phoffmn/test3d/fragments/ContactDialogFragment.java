@@ -133,6 +133,7 @@ public class ContactDialogFragment extends DialogFragment {
                     try {
 
                         String name = nameEditText.getText().toString();
+
                         String company = companyNameEditText.getText().toString();
                         String email = emailEditText.getText().toString();
                         String phone = phoneEditText.getText().toString();
@@ -149,6 +150,8 @@ public class ContactDialogFragment extends DialogFragment {
                                 .put("checkbox3", checkbox3.isChecked());
 
                         edit.putString(timeStamp, obj.toString()).apply();
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -159,6 +162,11 @@ public class ContactDialogFragment extends DialogFragment {
                 }
             });
         }
+    }
+
+    private void showContacts() {
+
+
     }
 
     @Override

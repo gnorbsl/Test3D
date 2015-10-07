@@ -5,6 +5,8 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -23,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -321,44 +324,68 @@ public class MainActivity extends RendererActivity {
         showData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
 
                 Map<String, ?> prefEntries = pref.getAll();
 
-               String[] contacts = new String[prefEntries.size()];
+                String[] contacts = new String[prefEntries.size()];
 
                 int i = 0;
                 for (Map.Entry<String, ?> entry : prefEntries.entrySet()) {
 
-                   contacts[i] = entry.getValue().toString();
+                    contacts[i] = entry.getValue().toString();
                     i++;
                 }
 
 
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment prev = getFragmentManager().findFragmentByTag("list_dialog");
-                if (prev != null) {
-                    ft.remove(prev);
-                }
-
-                ft.addToBackStack(null);
-
                 DialogFragment newFragment = ContactListFragment.newInstance(contacts);
-                newFragment.show(ft, "list_dialog");
+                newFragment.show(createFragmentTransaction("list_dialog"), "list_dialog");
+
+
             }
         });
 
         Button deleteData = (Button) findViewById(R.id.deleteData);
+
 
         deleteData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
                 pref.edit().clear().apply();
+
+                deleteImagesInDirectory();
             }
         });
 
+    }
+
+    private FragmentTransaction createFragmentTransaction(String fragmentName) {
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag(fragmentName);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+
+        ft.addToBackStack(null);
+        return ft;
+    }
+
+    private void deleteImagesInDirectory() {
+
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "BusinessCards");
+
+        if (storageDir.isDirectory()) {
+
+            String[] children = storageDir.list();
+            for (int i = 0; i < children.length; i++)
+            {
+                new File(storageDir, children[i]).delete();
+            }
+        }
     }
 
     private void createStatisticDrawer() {
@@ -465,16 +492,9 @@ public class MainActivity extends RendererActivity {
 
     private void createDialogFragment(int kind_of_dialog) {
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-        if (prev != null) {
-            ft.remove(prev);
-        }
-
-        ft.addToBackStack(null);
 
         DialogFragment newFragment = ContactDialogFragment.newInstance(kind_of_dialog);
-        newFragment.show(ft, "dialog");
+        newFragment.show(createFragmentTransaction("dialog"), "dialog");
 
         drawercontact.close();
     }
