@@ -17,6 +17,8 @@ import org.json.JSONObject;
 
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.adapter.ContactListAdapter;
+import rx.Observable;
+import rx.functions.Func1;
 
 public class ContactListFragment extends DialogFragment {
 
@@ -67,8 +69,7 @@ public class ContactListFragment extends DialogFragment {
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
+        mListView.setAdapter(mAdapter);
 
         return view;
     }

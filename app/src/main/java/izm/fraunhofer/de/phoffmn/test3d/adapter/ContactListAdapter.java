@@ -33,7 +33,7 @@ public class ContactListAdapter extends ArrayAdapter{
 
     private static final String TAG = "ContactListAdapter";
     private final Context context;
-    private final int layoutResourceId;
+
     private final JSONObject[] contacts;
 
 
@@ -42,7 +42,6 @@ public class ContactListAdapter extends ArrayAdapter{
         super(context, layoutResourceId, contacts);
 
         this.context = context;
-        this.layoutResourceId = layoutResourceId;
         this.contacts = contacts;
 
         for (JSONObject jsonObject : contacts) {

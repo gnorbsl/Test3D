@@ -15,11 +15,12 @@
         <TextView
             android:id="@+id/handlecontact"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/fraunhofergreen"
+            android:layout_height="35dp"
+            android:background="@drawable/contact_drawer_background"
             android:gravity="center"
             android:text="Leave Contactinformation"
-            android:textColor="@color/abc_primary_text_material_dark" />
+            android:textColor="@color/abc_primary_text_material_dark"
+            />
 
         <RelativeLayout
             android:id="@+id/contentcontact"

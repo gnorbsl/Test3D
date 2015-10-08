@@ -1,8 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "izm.fraunhofer.de.phoffmn.test3d"
@@ -26,4 +33,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
+
 }
+retrolambda {
+    oldJdk JAVA7_HOME
+    jdk JAVA8_HOME
+}
+

@@ -1,13 +1,18 @@
 package izm.fraunhofer.de.phoffmn.test3d.activities;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -27,12 +32,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
 
-import hollowsoft.slidingdrawer.OnDrawerCloseListener;
-import hollowsoft.slidingdrawer.OnDrawerOpenListener;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDialogFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
+import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
 import min3d.core.Object3dContainer;
 import min3d.core.RendererActivity;
 import min3d.parser.IParser;
@@ -49,6 +53,7 @@ public class MainActivity extends RendererActivity {
     //5. profit
 
     private static final String TAG = "MainActivity";
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private float touchedX, touchedY;
     private float lastplanePosition, planePosition;
     private float maxScal = 2f, minScal = .1f;
@@ -75,6 +80,8 @@ public class MainActivity extends RendererActivity {
     private ImageView handle;
     private ArrayList<String> logDummyLines;
 
+
+    SharedPreferences pref;
 
     @Override
     public void initScene() {
@@ -130,11 +137,11 @@ public class MainActivity extends RendererActivity {
 
     private void positionModelInWorld() {
 
-        holder.scale().x -= .1f;
-        holder.scale().y -= .1f;
-        holder.scale().z -= .1f;
+        holder.scale().x -= .25f;
+        holder.scale().y -= .25f;
+        holder.scale().z -= .25f;
 
-        bondModel.position().x = -2f;
+        bondModel.position().x = -2.7f;
         bondModel.position().y = -1.2f;
         bondModel.position().z = 0;
 
@@ -143,19 +150,16 @@ public class MainActivity extends RendererActivity {
     }
 
     private void removeLoadingAlertDialog() {
-        this.runOnUiThread(new Runnable() {
+        this.runOnUiThread(() -> {
 
-            public void run() {
-
-                dialog.cancel();
-                handler.removeCallbacksAndMessages(null);
-                drawer.setVisibility(View.VISIBLE);
-                handle.setVisibility(View.VISIBLE);
-                navigation.setVisibility(View.VISIBLE);
-                logo.setVisibility(View.VISIBLE);
-                ninepatch.setVisibility(View.VISIBLE);
-                drawercontact.setVisibility(View.VISIBLE);
-            }
+            dialog.cancel();
+            handler.removeCallbacksAndMessages(null);
+            drawer.setVisibility(View.VISIBLE);
+            handle.setVisibility(View.VISIBLE);
+            navigation.setVisibility(View.VISIBLE);
+            logo.setVisibility(View.VISIBLE);
+            ninepatch.setVisibility(View.VISIBLE);
+            drawercontact.setVisibility(View.VISIBLE);
         });
 
     }
@@ -165,7 +169,6 @@ public class MainActivity extends RendererActivity {
      */
     private void createAndStartLoadingAlertDialog() {
 
-        //TODO can be replaced with rxandroid
         this.runOnUiThread(new Runnable() {
 
             public void run() {
@@ -185,7 +188,6 @@ public class MainActivity extends RendererActivity {
                         handler.postDelayed(this, (long) ((Math.random() * 500) + 300));
                     }
                 };
-
 
                 handler.postDelayed(r, 500);
                 dialog.setCancelable(false);
@@ -242,8 +244,9 @@ public class MainActivity extends RendererActivity {
     @Override
     protected void onCreateSetContentView() {
         super.onCreateSetContentView();
-
         setContentView(R.layout.activity_main);
+
+        pref = Tools.getPreferences(MainActivity.this);
 
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.content);
         mainLayout.addView(_glSurfaceView);
@@ -256,47 +259,45 @@ public class MainActivity extends RendererActivity {
 
     private void create3DNavigation(View mainLayout) {
 
-        mainLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        touchedX = event.getX();
-                        touchedY = event.getY();
-                        break;
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                        if (event.getPointerCount() == 2) {
+        mainLayout.setOnTouchListener((v, event) -> {
 
-                            lastplanePosition = spacing(event);
-                        }
-                        break;
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    touchedX = event.getX();
+                    touchedY = event.getY();
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    if (event.getPointerCount() == 2) {
 
-                    case MotionEvent.ACTION_MOVE:
-                        switch (event.getPointerCount()) {
+                        lastplanePosition = spacing(event);
+                    }
+                    break;
 
-                            case 1:
-                                holder.rotation().y -= (touchedX - event.getX()) / 2f;
-                                holder.rotation().x -= (touchedY - event.getY()) / 2f;
-                                touchedX = event.getX();
-                                touchedY = event.getY();
-                                break;
+                case MotionEvent.ACTION_MOVE:
+                    switch (event.getPointerCount()) {
 
-                            case 2:
-                                planePosition = spacing(event);
-                                float scaledRatio = planePosition / lastplanePosition;
-                                totalRatio = totalRatio * scaledRatio;
+                        case 1:
+                            holder.rotation().y -= (touchedX - event.getX()) / 2f;
+                            holder.rotation().x -= (touchedY - event.getY()) / 2f;
+                            touchedX = event.getX();
+                            touchedY = event.getY();
+                            break;
 
-                                if (totalRatio > maxScal) totalRatio = maxScal;
-                                if (totalRatio < minScal) totalRatio = minScal;
+                        case 2:
+                            planePosition = spacing(event);
+                            float scaledRatio = planePosition / lastplanePosition;
+                            totalRatio = totalRatio * scaledRatio;
 
-                                holder.scale().x = holder.scale().y = holder.scale().z = totalRatio;
-                                lastplanePosition = planePosition;
-                                break;
-                        }
-                        break;
-                }
-                return true;
+                            if (totalRatio > maxScal) totalRatio = maxScal;
+                            if (totalRatio < minScal) totalRatio = minScal;
+
+                            holder.scale().x = holder.scale().y = holder.scale().z = totalRatio;
+                            lastplanePosition = planePosition;
+                            break;
+                    }
+                    break;
             }
+            return true;
         });
     }
 
@@ -311,55 +312,41 @@ public class MainActivity extends RendererActivity {
         createNavigation();
 
         logo = (ImageView) findViewById(R.id.logo);
-        logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
+        logo.setOnClickListener(v -> finish());
 
         Button showData = (Button) findViewById(R.id.showdata);
-
-
         //TODO hide them somehow
-        showData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        showData.setOnClickListener(v -> {
 
-                SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
-
-                Map<String, ?> prefEntries = pref.getAll();
-
-                String[] contacts = new String[prefEntries.size()];
-
-                int i = 0;
-                for (Map.Entry<String, ?> entry : prefEntries.entrySet()) {
-
-                    contacts[i] = entry.getValue().toString();
-                    i++;
-                }
+            Map<String, ?> prefEntries = pref.getAll();
 
 
-                DialogFragment newFragment = ContactListFragment.newInstance(contacts);
-                newFragment.show(createFragmentTransaction("list_dialog"), "list_dialog");
+            String[] contacts = new String[prefEntries.size()];
 
+            int i = 0;
+            for (Map.Entry<String, ?> entry : prefEntries.entrySet()) {
 
+                contacts[i] = entry.getValue().toString();
+                i++;
             }
+
+            DialogFragment newFragment = ContactListFragment.newInstance(contacts);
+            newFragment.show(createFragmentTransaction("list_dialog"), "list_dialog");
+
+
         });
 
         Button deleteData = (Button) findViewById(R.id.deleteData);
 
+        deleteData.setOnClickListener(v -> {
 
-        deleteData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getSharedPreferences(ContactDialogFragment.SHARED_KEY, MODE_PRIVATE);
-                pref.edit().clear().apply();
+            pref.edit().clear().apply();
 
-                deleteImagesInDirectory();
-            }
+            deleteImagesInDirectory();
         });
+
+
+
 
     }
 
@@ -382,10 +369,9 @@ public class MainActivity extends RendererActivity {
 
         if (storageDir.isDirectory()) {
 
-            String[] children = storageDir.list();
-            for (int i = 0; i < children.length; i++)
-            {
-                new File(storageDir, children[i]).delete();
+            String[] files = storageDir.list();
+            for (String fileName : files) {
+                new File(storageDir, fileName).delete();
             }
         }
     }
@@ -395,19 +381,9 @@ public class MainActivity extends RendererActivity {
         drawer = (SlidingDrawer) findViewById(R.id.drawer);
         handle = (ImageView) findViewById(R.id.handle);
 
-        drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
-            @Override
-            public void onDrawerOpened() {
-                handle.setImageDrawable(getResources().getDrawable(R.drawable.statshide));
-            }
-        });
+        drawer.setOnDrawerOpenListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.statshide)));
 
-        drawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
-            @Override
-            public void onDrawerClosed() {
-                handle.setImageDrawable(getResources().getDrawable(R.drawable.stats));
-            }
-        });
+        drawer.setOnDrawerCloseListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.stats)));
     }
 
     private void createContactDrawer() {
@@ -416,24 +392,11 @@ public class MainActivity extends RendererActivity {
 
         TextView takePictureTextView = (TextView) findViewById(R.id.cameratext);
 
-        takePictureTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                createDialogFragment(ContactDialogFragment.ADD_WITH_IMAGE);
-
-            }
-        });
+        takePictureTextView.setOnClickListener(v -> dispatchTakePictureIntent());
 
         TextView addContactInfoTextView = (TextView) findViewById(R.id.addcontactinformation);
 
-        addContactInfoTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                createDialogFragment(ContactDialogFragment.ADD_WITHOUT_IMAGE);
-            }
-        });
+        addContactInfoTextView.setOnClickListener(v -> createDialogFragment(ContactDialogFragment.ADD_WITHOUT_IMAGE));
     }
 
     private void createNavigation() {
@@ -441,55 +404,19 @@ public class MainActivity extends RendererActivity {
         navigation = (LinearLayout) findViewById(R.id.navigation);
 
         ImageButton top = (ImageButton) findViewById(R.id.top);
+        top.setOnClickListener(v -> bondModel.position().y -= 0.3f);
+
         ImageButton right = (ImageButton) findViewById(R.id.right);
+        right.setOnClickListener(v -> bondModel.position().x -= 0.3f);
+
         ImageButton bottom = (ImageButton) findViewById(R.id.bottom);
+        bottom.setOnClickListener(v -> bondModel.position().y += 0.3f);
+
         ImageButton left = (ImageButton) findViewById(R.id.left);
-
-        top.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                bondModel.position().y -= 0.3f;
-
-            }
-        });
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                bondModel.position().x -= 0.3f;
-
-            }
-        });
-
-        bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                bondModel.position().y += 0.3f;
-
-            }
-        });
-
-        left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                bondModel.position().x += 0.3f;
-
-            }
-        });
+        left.setOnClickListener(v -> bondModel.position().x += 0.3f);
 
         Button resetView = (Button) findViewById(R.id.resetView);
-        resetView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                resetModelPosition();
-
-            }
-        });
+        resetView.setOnClickListener(v -> resetModelPosition());
     }
 
     private void createDialogFragment(int kind_of_dialog) {
@@ -544,5 +471,67 @@ public class MainActivity extends RendererActivity {
         float y = event.getY(0) - event.getY(1);
         return (float) Math.sqrt(x * x + y * y);
     }
+
+    /**
+     * starts the camera app and provides a pre defined file to store the pictuure
+     */
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = Tools.createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                //TODO show error
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                Log.d(TAG, "IMAGE CREATED INTENT" + Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        }
+    }
+
+    /**
+     * will be called after the picture was taken or cancelled, picture will be shown in an alertdialog
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+                createDialogFragment(ContactDialogFragment.ADD_WITH_IMAGE);
+            }
+                // Image captured and saved to fileUri specified in the Intent
+
+                /*Log.d(TAG, "CURRENTPATH: " + Tools.currentPhotoPath);
+
+                Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
+
+                imageView.setImageBitmap(imageBitmap);
+                storeImageView.setVisibility(View.VISIBLE);
+
+
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // User cancelled the image capture
+                getDialog().cancel();
+            } else {
+                // Image capture failed, advise user
+                //TODO add dialog to inform user
+            }*/
+
+        }
+    }
+
 
 }
