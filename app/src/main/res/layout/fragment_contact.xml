@@ -4,16 +4,16 @@
     android:layout_height="match_parent">
 
     <hollowsoft.slidingdrawer.SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawercontact"
+        android:id="@+id/contact_drawer"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:visibility="invisible"
-        drawer:content="@+id/contentcontact"
-        drawer:handle="@+id/handlecontact">
+        drawer:content="@+id/contact_content"
+        drawer:handle="@+id/contact_handle">
 
         <TextView
-            android:id="@+id/handlecontact"
+            android:id="@+id/contact_handle"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/contact_drawer_background"
@@ -23,13 +23,13 @@
             />
 
         <RelativeLayout
-            android:id="@+id/contentcontact"
+            android:id="@+id/contact_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/fraunhofergreen">
 
             <ImageView
-                android:id="@+id/cameraicon"
+                android:id="@+id/contact_camera_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -38,16 +38,16 @@
 
 
             <TextView
-                android:id="@+id/cameratext"
+                android:id="@+id/contact_camera_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/cameraicon"
+                android:layout_height="48dp"
+                android:layout_alignBottom="@+id/contact_camera_icon"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="4dp"
-                android:layout_toEndOf="@+id/cameraicon"
-                android:layout_toRightOf="@+id/cameraicon"
+                android:layout_toEndOf="@+id/contact_camera_icon"
+                android:layout_toRightOf="@+id/contact_camera_icon"
                 android:background="@drawable/resetbuttondrawable"
                 android:clickable="true"
                 android:gravity="center_vertical"
@@ -55,27 +55,27 @@
                 android:textColor="@color/abc_primary_text_material_dark" />
 
             <ImageView
-                android:id="@+id/contacticon"
+                android:id="@+id/contact_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cameraicon"
+                android:layout_below="@+id/contact_camera_icon"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_contact_phone_white_48dp" />
 
 
             <TextView
-                android:id="@+id/addcontactinformation"
+                android:id="@+id/contact_add_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/contacticon"
-                android:layout_alignLeft="@+id/cameratext"
+                android:layout_height="48dp"
+                android:layout_alignBottom="@+id/contact_icon"
+                android:layout_alignLeft="@+id/contact_camera_text"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignStart="@+id/cameratext"
-                android:layout_alignTop="@+id/contacticon"
+                android:layout_alignStart="@+id/contact_icon"
+                android:layout_alignTop="@+id/contact_icon"
                 android:layout_marginLeft="4dp"
-                android:layout_toEndOf="@+id/contacticon"
-                android:layout_toRightOf="@+id/contacticon"
+                android:layout_toEndOf="@+id/contact_icon"
+                android:layout_toRightOf="@+id/contact_icon"
                 android:background="@drawable/resetbuttondrawable"
                 android:clickable="true"
                 android:gravity="center_vertical"

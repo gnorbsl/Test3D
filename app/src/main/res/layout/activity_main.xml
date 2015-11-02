@@ -20,13 +20,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
+        android:orientation="vertical"/>
 
-
-        >
-
-
-    </LinearLayout>
 
     <fragment
         android:id="@+id/contactinfofragment"
@@ -45,7 +40,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/fraunhoferlogotransparent"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/ninepatch"

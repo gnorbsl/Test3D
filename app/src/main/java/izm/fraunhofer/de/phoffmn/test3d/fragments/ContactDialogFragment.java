@@ -3,6 +3,7 @@ package izm.fraunhofer.de.phoffmn.test3d.fragments;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -49,6 +50,8 @@ public class ContactDialogFragment extends DialogFragment {
     private EditText phoneEditText;
     private EditText additionalInfo;
 
+    int kind_of_dialog;
+
     static public ContactDialogFragment newInstance(int value) {
         ContactDialogFragment f = new ContactDialogFragment();
 
@@ -65,7 +68,8 @@ public class ContactDialogFragment extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int kind_of_dialog = getArguments().getInt(KIND_OF_DIALOG);
+
+        kind_of_dialog = getArguments().getInt(KIND_OF_DIALOG);
 
         Button saveContact = (Button) view.findViewById(R.id.savecontact);
 
@@ -193,4 +197,11 @@ public class ContactDialogFragment extends DialogFragment {
     }
 
 
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+
+        if (kind_of_dialog == ADD_WITH_IMAGE)
+            new File(Tools.currentPhotoPath).delete();
+    }
 }

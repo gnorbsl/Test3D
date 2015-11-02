@@ -8,8 +8,10 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -32,9 +35,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDialogFragment;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDrawerFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
 import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
 import min3d.core.Object3dContainer;
@@ -43,7 +49,7 @@ import min3d.parser.IParser;
 import min3d.parser.Parser;
 import min3d.vos.Light;
 
-public class MainActivity extends RendererActivity {
+public class MainActivity extends RendererActivity implements ContactDrawerFragment.ContactFragmentInterface{
 
     //TODO how to convert 3d model:
     //1. convert model from vrml1 to vrml2 with vrml1tovrml2
@@ -60,6 +66,7 @@ public class MainActivity extends RendererActivity {
     private float totalRatio = .9f;
     private int counter = 0;
     private Object3dContainer bondModel;
+
     //empty holder must be used to center the model
     private Object3dContainer holder;
     private float initHolderScaleX;
@@ -69,28 +76,48 @@ public class MainActivity extends RendererActivity {
     private float initHolderRotationY;
     private float initHolderPositionX;
     private float initHolderPositionY;
+
     private Dialog dialog;
     private TextView message;
     private Handler handler;
-    private ImageView ninepatch;
-    private ImageView logo;
-    private LinearLayout navigation;
-    private SlidingDrawer drawer;
-    private SlidingDrawer drawercontact;
-    private ImageView handle;
+
     private ArrayList<String> logDummyLines;
 
 
     SharedPreferences pref;
 
+    //StatisticsDrawer
+    @Bind(R.id.drawer) SlidingDrawer drawer;
+    @Bind(R.id.handle) ImageView handle;
+
+
+
+    //MainLayoutViews
+    @Bind(R.id.content) LinearLayout contentView;
+
+    @Bind(R.id.logo) ImageView logo;
+    @Bind(R.id.ninepatch) ImageView ninepatch;
+
+    @Bind(R.id.showdata) Button showData;
+    @Bind(R.id.deleteData) Button deleteData;
+
+    //Navigationviews
+    @Bind(R.id.navigation) LinearLayout navigation;
+
+    @Bind(R.id.top) ImageButton top;
+    @Bind(R.id.left) ImageButton left;
+    @Bind(R.id.bottom) ImageButton bottom;
+    @Bind(R.id.right) ImageButton right;
+    @Bind(R.id.resetView) Button resetButton;
+
+    private ContactDrawerFragment contactFragment;
+
+
     @Override
     public void initScene() {
 
-        holder = new Object3dContainer();
-
-        addSceneLights();
-
         createBondModel();
+        addSceneLights();
 
         holder.addChild(bondModel);
         scene.addChild(holder);
@@ -133,13 +160,14 @@ public class MainActivity extends RendererActivity {
         positionModelInWorld();
 
         saveInitialValuesOfModel();
+
     }
 
     private void positionModelInWorld() {
 
-        holder.scale().x -= .25f;
-        holder.scale().y -= .25f;
-        holder.scale().z -= .25f;
+        holder.scale().x = .75f;
+        holder.scale().y = .75f;
+        holder.scale().z = .75f;
 
         bondModel.position().x = -2.7f;
         bondModel.position().y = -1.2f;
@@ -150,6 +178,7 @@ public class MainActivity extends RendererActivity {
     }
 
     private void removeLoadingAlertDialog() {
+
         this.runOnUiThread(() -> {
 
             dialog.cancel();
@@ -159,13 +188,22 @@ public class MainActivity extends RendererActivity {
             navigation.setVisibility(View.VISIBLE);
             logo.setVisibility(View.VISIBLE);
             ninepatch.setVisibility(View.VISIBLE);
-            drawercontact.setVisibility(View.VISIBLE);
+
+            contactFragment = (ContactDrawerFragment) getFragmentManager().findFragmentById(R.id.contactinfofragment);
+            if (null != contactFragment && contactFragment.isInLayout()) {
+                contactFragment.showDrawer();
+            }
+
+
         });
+
+
 
     }
 
+
     /**
-     * Creates the LoadingDialog which simulates a calculation, must be run from UI thread
+     * Creates the LoadingDialog which simulates a calculation, must run from UI thread
      */
     private void createAndStartLoadingAlertDialog() {
 
@@ -245,21 +283,22 @@ public class MainActivity extends RendererActivity {
     protected void onCreateSetContentView() {
         super.onCreateSetContentView();
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         pref = Tools.getPreferences(MainActivity.this);
 
-        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.content);
-        mainLayout.addView(_glSurfaceView);
+        contentView.addView(_glSurfaceView);
 
-        create3DNavigation(mainLayout);
+        holder = new Object3dContainer();
+        create3DNavigation(contentView);
 
         createViewsAndListeners();
 
     }
 
-    private void create3DNavigation(View mainLayout) {
+    private void create3DNavigation(View contentView) {
 
-        mainLayout.setOnTouchListener((v, event) -> {
+        contentView.setOnTouchListener((v, event) -> {
 
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
@@ -303,18 +342,14 @@ public class MainActivity extends RendererActivity {
 
     private void createViewsAndListeners() {
 
-        ninepatch = (ImageView) findViewById(R.id.ninepatch);
-
-        createContactDrawer();
+        //createContactDrawer();
 
         createStatisticDrawer();
 
         createNavigation();
 
-        logo = (ImageView) findViewById(R.id.logo);
         logo.setOnClickListener(v -> finish());
 
-        Button showData = (Button) findViewById(R.id.showdata);
         //TODO hide them somehow
         showData.setOnClickListener(v -> {
 
@@ -336,7 +371,6 @@ public class MainActivity extends RendererActivity {
 
         });
 
-        Button deleteData = (Button) findViewById(R.id.deleteData);
 
         deleteData.setOnClickListener(v -> {
 
@@ -378,54 +412,29 @@ public class MainActivity extends RendererActivity {
 
     private void createStatisticDrawer() {
 
-        drawer = (SlidingDrawer) findViewById(R.id.drawer);
-        handle = (ImageView) findViewById(R.id.handle);
+
 
         drawer.setOnDrawerOpenListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.statshide)));
 
         drawer.setOnDrawerCloseListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.stats)));
     }
 
-    private void createContactDrawer() {
-
-        drawercontact = (SlidingDrawer) findViewById(R.id.drawercontact);
-
-        TextView takePictureTextView = (TextView) findViewById(R.id.cameratext);
-
-        takePictureTextView.setOnClickListener(v -> dispatchTakePictureIntent());
-
-        TextView addContactInfoTextView = (TextView) findViewById(R.id.addcontactinformation);
-
-        addContactInfoTextView.setOnClickListener(v -> createDialogFragment(ContactDialogFragment.ADD_WITHOUT_IMAGE));
-    }
 
     private void createNavigation() {
 
-        navigation = (LinearLayout) findViewById(R.id.navigation);
-
-        ImageButton top = (ImageButton) findViewById(R.id.top);
         top.setOnClickListener(v -> bondModel.position().y -= 0.3f);
-
-        ImageButton right = (ImageButton) findViewById(R.id.right);
         right.setOnClickListener(v -> bondModel.position().x -= 0.3f);
-
-        ImageButton bottom = (ImageButton) findViewById(R.id.bottom);
         bottom.setOnClickListener(v -> bondModel.position().y += 0.3f);
-
-        ImageButton left = (ImageButton) findViewById(R.id.left);
         left.setOnClickListener(v -> bondModel.position().x += 0.3f);
 
-        Button resetView = (Button) findViewById(R.id.resetView);
-        resetView.setOnClickListener(v -> resetModelPosition());
+        resetButton.setOnClickListener(v -> resetModelPosition());
     }
 
-    private void createDialogFragment(int kind_of_dialog) {
-
+    public void createDialogFragment(int kind_of_dialog) {
 
         DialogFragment newFragment = ContactDialogFragment.newInstance(kind_of_dialog);
         newFragment.show(createFragmentTransaction("dialog"), "dialog");
 
-        drawercontact.close();
     }
 
     private void resetModelPosition() {
@@ -475,7 +484,7 @@ public class MainActivity extends RendererActivity {
     /**
      * starts the camera app and provides a pre defined file to store the pictuure
      */
-    private void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -512,26 +521,8 @@ public class MainActivity extends RendererActivity {
 
                 createDialogFragment(ContactDialogFragment.ADD_WITH_IMAGE);
             }
-                // Image captured and saved to fileUri specified in the Intent
-
-                /*Log.d(TAG, "CURRENTPATH: " + Tools.currentPhotoPath);
-
-                Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
-
-                imageView.setImageBitmap(imageBitmap);
-                storeImageView.setVisibility(View.VISIBLE);
-
-
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                // User cancelled the image capture
-                getDialog().cancel();
-            } else {
-                // Image capture failed, advise user
-                //TODO add dialog to inform user
-            }*/
 
         }
     }
-
 
 }
