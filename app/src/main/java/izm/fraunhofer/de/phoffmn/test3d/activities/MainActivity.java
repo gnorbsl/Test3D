@@ -1,5 +1,6 @@
 package izm.fraunhofer.de.phoffmn.test3d.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,25 +8,36 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.rajawali3d.IRajawaliDisplay;
+import org.rajawali3d.surface.IRajawaliSurface;
+import org.rajawali3d.surface.IRajawaliSurfaceRenderer;
+import org.rajawali3d.surface.RajawaliSurfaceView;
+import org.rajawali3d.surface.RajawaliTextureView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,14 +54,10 @@ import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDialogFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDrawerFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.ModelFragment;
 import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
-import min3d.core.Object3dContainer;
-import min3d.core.RendererActivity;
-import min3d.parser.IParser;
-import min3d.parser.Parser;
-import min3d.vos.Light;
 
-public class MainActivity extends RendererActivity implements ContactDrawerFragment.ContactFragmentInterface{
+public class MainActivity extends AppCompatActivity implements ContactDrawerFragment.ContactFragmentInterface {
 
     //TODO how to convert 3d model:
     //1. convert model from vrml1 to vrml2 with vrml1tovrml2
@@ -60,15 +68,13 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
 
     private static final String TAG = "MainActivity";
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    public static final String CONTENT_FRAGMENT = "content_fragment";
     private float touchedX, touchedY;
     private float lastplanePosition, planePosition;
     private float maxScal = 2f, minScal = .1f;
     private float totalRatio = .9f;
     private int counter = 0;
-    private Object3dContainer bondModel;
 
-    //empty holder must be used to center the model
-    private Object3dContainer holder;
     private float initHolderScaleX;
     private float initHolderScaleY;
     private float initHolderScaleZ;
@@ -93,7 +99,9 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
 
 
     //MainLayoutViews
-    @Bind(R.id.content) LinearLayout contentView;
+    @Bind(R.id.content)
+    FrameLayout contentView;
+
 
     @Bind(R.id.logo) ImageView logo;
     @Bind(R.id.ninepatch) ImageView ninepatch;
@@ -101,91 +109,20 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
     @Bind(R.id.showdata) Button showData;
     @Bind(R.id.deleteData) Button deleteData;
 
-    //Navigationviews
-    @Bind(R.id.navigation) LinearLayout navigation;
-
-    @Bind(R.id.top) ImageButton top;
-    @Bind(R.id.left) ImageButton left;
-    @Bind(R.id.bottom) ImageButton bottom;
-    @Bind(R.id.right) ImageButton right;
-    @Bind(R.id.resetView) Button resetButton;
-
     private ContactDrawerFragment contactFragment;
+    private Renderer renderer;
 
 
-    @Override
-    public void initScene() {
 
-        createBondModel();
-        addSceneLights();
-
-        holder.addChild(bondModel);
-        scene.addChild(holder);
-
-    }
-
-    private void addSceneLights() {
-
-        Light myLight = new Light();
-        myLight.position.setZ(150);
-
-        scene.lights().add(myLight);
-    }
-
-    /**
-     * creates the BondModel and also adds a loading dialog while loading the model
-     */
-    private void createBondModel() {
-
-        IParser parser = Parser.createParser(Parser.Type.OBJ, getResources(),
-                "izm.fraunhofer.de.phoffmn.test3d:raw/blubba_obj", true);
-
-        createDummyLoadingText();
-        createAndStartLoadingAlertDialog();
-
-        //in case something goes wrong to avoid that the user get stuck on the loading dialog
-        try {
-            parser.parse();
-        } catch (Exception e) {
-            removeLoadingAlertDialog();
-        }
-
-        removeLoadingAlertDialog();
-
-        scene.backgroundColor().setAll(getResources().getColor(R.color.background_material_light));
-
-        bondModel = parser.getParsedObject();
-        bondModel.colorMaterialEnabled(true);
-
-        positionModelInWorld();
-
-        saveInitialValuesOfModel();
-
-    }
-
-    private void positionModelInWorld() {
-
-        holder.scale().x = .75f;
-        holder.scale().y = .75f;
-        holder.scale().z = .75f;
-
-        bondModel.position().x = -2.7f;
-        bondModel.position().y = -1.2f;
-        bondModel.position().z = 0;
-
-        bondModel.rotation().y = 90;
-        bondModel.rotation().x = 180;
-    }
 
     private void removeLoadingAlertDialog() {
 
         this.runOnUiThread(() -> {
 
-            dialog.cancel();
-            handler.removeCallbacksAndMessages(null);
+           // dialog.cancel();
+           // handler.removeCallbacksAndMessages(null);
             drawer.setVisibility(View.VISIBLE);
             handle.setVisibility(View.VISIBLE);
-            navigation.setVisibility(View.VISIBLE);
             logo.setVisibility(View.VISIBLE);
             ninepatch.setVisibility(View.VISIBLE);
 
@@ -266,79 +203,51 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
      */
     private void saveInitialValuesOfModel() {
 
-        initHolderScaleX = holder.scale().x;
-        initHolderScaleY = holder.scale().y;
-        initHolderScaleZ = holder.scale().z;
-
-        initHolderRotationX = holder.rotation().x;
-        initHolderRotationY = holder.rotation().y;
-
-        initHolderPositionX = bondModel.position().x;
-        initHolderPositionY = bondModel.position().y;
-
-
     }
 
     @Override
-    protected void onCreateSetContentView() {
-        super.onCreateSetContentView();
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
 
+
+        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        try {
+            final Fragment fragment = (Fragment) new ModelFragment();
+
+
+
+            if (getFragmentManager().findFragmentByTag(CONTENT_FRAGMENT) != null)
+                transaction.addToBackStack(null);
+
+            transaction.replace(R.id.contentview, fragment, CONTENT_FRAGMENT);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        getSupportActionBar().hide();
         pref = Tools.getPreferences(MainActivity.this);
 
-        contentView.addView(_glSurfaceView);
+        removeLoadingAlertDialog();
 
-        holder = new Object3dContainer();
-        create3DNavigation(contentView);
+
+
+
+
+
+
+        //create3DNavigation(contentView);
 
         createViewsAndListeners();
-
     }
 
-    private void create3DNavigation(View contentView) {
-
-        contentView.setOnTouchListener((v, event) -> {
-
-            switch (event.getActionMasked()) {
-                case MotionEvent.ACTION_DOWN:
-                    touchedX = event.getX();
-                    touchedY = event.getY();
-                    break;
-                case MotionEvent.ACTION_POINTER_DOWN:
-                    if (event.getPointerCount() == 2) {
-
-                        lastplanePosition = spacing(event);
-                    }
-                    break;
-
-                case MotionEvent.ACTION_MOVE:
-                    switch (event.getPointerCount()) {
-
-                        case 1:
-                            holder.rotation().y -= (touchedX - event.getX()) / 2f;
-                            holder.rotation().x -= (touchedY - event.getY()) / 2f;
-                            touchedX = event.getX();
-                            touchedY = event.getY();
-                            break;
-
-                        case 2:
-                            planePosition = spacing(event);
-                            float scaledRatio = planePosition / lastplanePosition;
-                            totalRatio = totalRatio * scaledRatio;
-
-                            if (totalRatio > maxScal) totalRatio = maxScal;
-                            if (totalRatio < minScal) totalRatio = minScal;
-
-                            holder.scale().x = holder.scale().y = holder.scale().z = totalRatio;
-                            lastplanePosition = planePosition;
-                            break;
-                    }
-                    break;
-            }
-            return true;
-        });
-    }
 
     private void createViewsAndListeners() {
 
@@ -413,7 +322,6 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
     private void createStatisticDrawer() {
 
 
-
         drawer.setOnDrawerOpenListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.statshide)));
 
         drawer.setOnDrawerCloseListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.stats)));
@@ -421,25 +329,28 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
 
 
     private void createNavigation() {
-
+/*
         top.setOnClickListener(v -> bondModel.position().y -= 0.3f);
         right.setOnClickListener(v -> bondModel.position().x -= 0.3f);
         bottom.setOnClickListener(v -> bondModel.position().y += 0.3f);
         left.setOnClickListener(v -> bondModel.position().x += 0.3f);
+*/
 
-        resetButton.setOnClickListener(v -> resetModelPosition());
     }
 
     public void createDialogFragment(int kind_of_dialog) {
 
         DialogFragment newFragment = ContactDialogFragment.newInstance(kind_of_dialog);
+        newFragment.setCancelable(false);
         newFragment.show(createFragmentTransaction("dialog"), "dialog");
 
     }
 
     private void resetModelPosition() {
 
-        holder.scale().x = initHolderScaleX;
+
+
+/*        holder.scale().x = initHolderScaleX;
         holder.scale().y = initHolderScaleY;
         holder.scale().z = initHolderScaleZ;
 
@@ -447,7 +358,7 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
         bondModel.position().y = initHolderPositionY;
 
         holder.rotation().x = initHolderRotationX;
-        holder.rotation().y = initHolderRotationY;
+        holder.rotation().y = initHolderRotationY;*/
 
     }
 
@@ -524,5 +435,12 @@ public class MainActivity extends RendererActivity implements ContactDrawerFragm
 
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "Back pressed");
+    }
+
 
 }

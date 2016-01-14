@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:surfaceview="http://schemas.android.com/apk/res-auto"
+    tools:context="izm.fraunhofer.de.phoffmn.test3d.fragments.ModelFragment">
+
+
+    <org.rajawali3d.surface.RajawaliSurfaceView
+        android:id="@+id/rajwali_surface"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        surfaceview:frameRate="60.0"
+        surfaceview:renderMode="RENDER_WHEN_DIRTY" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="150dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="59dp">
+
+        <ImageButton
+            android:id="@+id/left"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/navigation_imagebutton_selector"
+            android:clickable="true"
+            android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
+
+        <ImageButton
+            android:id="@+id/top"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/navigation_imagebutton_selector"
+            android:clickable="true"
+            android:src="@drawable/ic_keyboard_arrow_up_white_48dp" />
+
+        <ImageButton
+            android:id="@+id/right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/navigation_imagebutton_selector"
+            android:clickable="true"
+            android:src="@drawable/ic_keyboard_arrow_right_white_48dp" />
+
+        <ImageButton
+            android:id="@+id/bottom"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/navigation_imagebutton_selector"
+            android:clickable="true"
+            android:src="@drawable/ic_keyboard_arrow_down_white_48dp" />
+
+
+
+
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/resetView"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/resetbuttondrawable"
+        android:clickable="true"
+        android:padding="4dp"
+        android:text="@string/reset_view_button"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:layout_gravity="right|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/frameLayout"
+        android:layout_alignEnd="@+id/frameLayout"
+        android:layout_alignLeft="@+id/frameLayout"
+        android:layout_alignStart="@+id/frameLayout"
+        android:enabled="false" />
+
+
+
+</RelativeLayout>

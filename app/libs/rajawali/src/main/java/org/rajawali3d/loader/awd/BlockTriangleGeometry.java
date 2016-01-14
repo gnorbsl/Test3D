@@ -73,7 +73,7 @@ public class BlockTriangleGeometry extends ABaseObjectBlockParser {
 		// Count of sub geometries
 		mSubGeometryCount = dis.readUnsignedShort();
 
-		// TODO Meshes need to be joined in some fashion. This might work. Need to test it I suppose.
+		// TODO Meshes need to be joined in some fashion. This might work. Need to test_mtl it I suppose.
 		// One object for each sub geometry
 		mBaseObjects = new Object3D[mSubGeometryCount];
 

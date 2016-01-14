@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class LoaderSTL extends AMeshLoader {
 
-	// FIXME More testing, Nexus 7 specifically has some issues with certain models. Nexus 4 works fine with same
+	// FIXME More testing_obj, Nexus 7 specifically has some issues with certain models. Nexus 4 works fine with same
 	// 'problem' models.
 
 	// TODO Add a feature for ASCII to Binary conversion.

@@ -15,7 +15,7 @@ package org.rajawali3d.util;
 import org.rajawali3d.math.Plane;
 import org.rajawali3d.math.vector.Vector3;
 
-/** Class offering various static methods for intersection testing between different geometric objects.
+/** Class offering various static methods for intersection testing_obj between different geometric objects.
  * 
  * Originally written by Badlogic Games. Ported for Rajawali by Andrew Jo.
  *  

@@ -308,7 +308,7 @@ public class Object3D extends ATransformable3D implements Comparable<Object3D>, 
 			if (mGeometry.hasBoundingSphere())
 				mGeometry.getBoundingSphere().drawBoundingVolume(camera, vpMatrix, projMatrix, vMatrix, mMMatrix);
 		}
-		// Draw children without frustum test
+		// Draw children without frustum test_mtl
 		for (int i = 0, j = mChildren.size(); i < j; i++) {
 			Object3D child = mChildren.get(i);
             if(mRenderChildrenAsBatch || mIsPartOfBatch) {

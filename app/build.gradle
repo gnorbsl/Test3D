@@ -34,6 +34,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'org.rajawali3d:rajawali:1.0.306-SNAPSHOT@aar'
 
 }
 retrolambda {

@@ -1157,7 +1157,7 @@ public class Vector3 {
      * Checks if this {@link Vector3} is of unit length with a specified
      * margin of error.
      *
-     * @param margin double The desired margin of error for the test.
+     * @param margin double The desired margin of error for the test_mtl.
      *
      * @return boolean True if this {@link Vector3} is of unit length.
      */
@@ -1177,7 +1177,7 @@ public class Vector3 {
     /**
      * Checks if the length of this {@link Vector3} is smaller than the specified margin.
      *
-     * @param margin double The desired margin of error for the test.
+     * @param margin double The desired margin of error for the test_mtl.
      *
      * @return boolean True if this {@link Vector3}'s length is smaller than the margin specified.
      */

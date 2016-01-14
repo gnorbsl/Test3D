@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public class ContactDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
 
 
+
         kind_of_dialog = getArguments().getInt(KIND_OF_DIALOG);
 
         Button saveContact = (Button) view.findViewById(R.id.savecontact);
@@ -76,7 +78,7 @@ public class ContactDialogFragment extends DialogFragment {
         Button cancelDialog = (Button) view.findViewById(R.id.cancelcontact);
         cancelDialog.setOnClickListener(v -> {
 
-            getDialog().cancel();
+            getDialog().dismiss();
 
             if (kind_of_dialog == ADD_WITH_IMAGE)
             new File(Tools.currentPhotoPath).delete();
@@ -111,7 +113,7 @@ public class ContactDialogFragment extends DialogFragment {
                 edit.putString(timeStamp, obj.toString());
                 edit.apply();
 
-                getDialog().cancel();
+                getDialog().dismiss();
 
             });
         } else if (kind_of_dialog == ADD_WITHOUT_IMAGE) {
@@ -146,7 +148,7 @@ public class ContactDialogFragment extends DialogFragment {
                 }
 
 
-                getDialog().cancel();
+                getDialog().dismiss();
             });
         }
     }
@@ -197,11 +199,4 @@ public class ContactDialogFragment extends DialogFragment {
     }
 
 
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-
-        if (kind_of_dialog == ADD_WITH_IMAGE)
-            new File(Tools.currentPhotoPath).delete();
-    }
 }

@@ -116,7 +116,7 @@ public interface IGraphNode {
 	 * contained (even partially) by the provided volume. How this is 
 	 * done is left to the implementation.
 	 * 
-	 * @param volume IBoundingVolume to test visibility against.
+	 * @param volume IBoundingVolume to test_mtl visibility against.
 	 */
 	public void cullFromBoundingVolume(IBoundingVolume volume);
 	
@@ -157,7 +157,7 @@ public interface IGraphNode {
 	 * Does this volume fully contain the input volume.
 	 * 
 	 * @param boundingVolume Volume to check containment of.
-	 * @return boolean result of containment test.
+	 * @return boolean result of containment test_mtl.
 	 */
 	public boolean contains(IBoundingVolume boundingVolume);
 	
@@ -165,7 +165,7 @@ public interface IGraphNode {
 	 * Is this volume fully contained by the input volume.
 	 * 
 	 * @param boundingVolume Volume to check containment by.
-	 * @return boolean result of containment test.
+	 * @return boolean result of containment test_mtl.
 	 */
 	public boolean isContainedBy(IBoundingVolume boundingVolume);
 }

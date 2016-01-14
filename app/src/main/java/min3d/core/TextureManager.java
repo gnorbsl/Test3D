@@ -18,7 +18,7 @@ import min3d.Shared;
  * exist in the TextureManager.
  * <p/>
  * Note that the _idToTextureName and _idToHasMipMap HashMaps used below
- * don't test for exceptions.
+ * don't test_mtl for exceptions.
  */
 public class TextureManager {
     private static int _counter = 1000001;
