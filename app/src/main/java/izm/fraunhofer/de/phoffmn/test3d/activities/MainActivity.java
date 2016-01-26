@@ -33,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.wunderlist.slidinglayer.SlidingLayer;
+
 import org.rajawali3d.IRajawaliDisplay;
 import org.rajawali3d.surface.IRajawaliSurface;
 import org.rajawali3d.surface.IRajawaliSurfaceRenderer;
@@ -55,9 +57,10 @@ import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDialogFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactDrawerFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
 import izm.fraunhofer.de.phoffmn.test3d.fragments.ModelFragment;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.StatisticsDrawerFragment;
 import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
 
-public class MainActivity extends AppCompatActivity implements ContactDrawerFragment.ContactFragmentInterface {
+public class MainActivity extends AppCompatActivity implements ContactDrawerFragment.ContactFragmentInterface, StatisticsDrawerFragment.OnFragmentInteractionListener {
 
     //TODO how to convert 3d model:
     //1. convert model from vrml1 to vrml2 with vrml1tovrml2
@@ -69,38 +72,16 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
     private static final String TAG = "MainActivity";
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     public static final String CONTENT_FRAGMENT = "content_fragment";
-    private float touchedX, touchedY;
-    private float lastplanePosition, planePosition;
-    private float maxScal = 2f, minScal = .1f;
-    private float totalRatio = .9f;
-    private int counter = 0;
-
-    private float initHolderScaleX;
-    private float initHolderScaleY;
-    private float initHolderScaleZ;
-    private float initHolderRotationX;
-    private float initHolderRotationY;
-    private float initHolderPositionX;
-    private float initHolderPositionY;
-
-    private Dialog dialog;
-    private TextView message;
-    private Handler handler;
-
-    private ArrayList<String> logDummyLines;
-
 
     SharedPreferences pref;
 
-    //StatisticsDrawer
-    @Bind(R.id.drawer) SlidingDrawer drawer;
-    @Bind(R.id.handle) ImageView handle;
+    @Bind(R.id.slidingLayer1)
+    SlidingLayer statDrawer;
 
-
-
-    //MainLayoutViews
-    @Bind(R.id.content)
-    FrameLayout contentView;
+    @Bind(R.id.showStats)
+    Button showStats;
+    @Bind(R.id.hideStats)
+    Button hideStats;
 
 
     @Bind(R.id.logo) ImageView logo;
@@ -110,19 +91,12 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
     @Bind(R.id.deleteData) Button deleteData;
 
     private ContactDrawerFragment contactFragment;
-    private Renderer renderer;
-
-
-
+    private StatisticsDrawerFragment statisticsFragment;
 
     private void removeLoadingAlertDialog() {
 
         this.runOnUiThread(() -> {
 
-           // dialog.cancel();
-           // handler.removeCallbacksAndMessages(null);
-            drawer.setVisibility(View.VISIBLE);
-            handle.setVisibility(View.VISIBLE);
             logo.setVisibility(View.VISIBLE);
             ninepatch.setVisibility(View.VISIBLE);
 
@@ -138,73 +112,6 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
 
     }
 
-
-    /**
-     * Creates the LoadingDialog which simulates a calculation, must run from UI thread
-     */
-    private void createAndStartLoadingAlertDialog() {
-
-        this.runOnUiThread(new Runnable() {
-
-            public void run() {
-
-                dialog = new Dialog(MainActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_loading);
-
-                message = (TextView) dialog.findViewById(R.id.message);
-                message.setMovementMethod(new ScrollingMovementMethod());
-
-                handler = new Handler();
-
-                final Runnable r = new Runnable() {
-                    public void run() {
-                        message.append(logDummyLines.get(counter++) + "\n");
-                        handler.postDelayed(this, (long) ((Math.random() * 500) + 300));
-                    }
-                };
-
-                handler.postDelayed(r, 500);
-                dialog.setCancelable(false);
-                dialog.show();
-
-            }
-        });
-    }
-
-    /**
-     * Loads a textfile (logdummy.txt) from ressources and adds the lines to an ArrayList
-     * these lines are used to simulate the calculating while loading a model
-     */
-    private void createDummyLoadingText() {
-
-        InputStream fileIn = getResources().openRawResource(getResources().getIdentifier(
-                "raw/logdummy", "raw", getPackageName()));
-
-        BufferedReader buffer = new BufferedReader(
-                new InputStreamReader(fileIn));
-
-        String line;
-
-        logDummyLines = new ArrayList<>();
-
-        try {
-            while ((line = buffer.readLine()) != null) {
-                logDummyLines.add(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * store first postion and scale values of model to be able to reset the view
-     */
-    private void saveInitialValuesOfModel() {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -215,12 +122,10 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
 
         ButterKnife.bind(this);
 
-
+        //TODO add new instance stuff
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         try {
-            final Fragment fragment = (Fragment) new ModelFragment();
-
-
+            final Fragment fragment = ModelFragment.newInstance(getIntent().getExtras().getString(StartActivity.BOND_DIAMETER));
 
             if (getFragmentManager().findFragmentByTag(CONTENT_FRAGMENT) != null)
                 transaction.addToBackStack(null);
@@ -237,25 +142,11 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
 
         removeLoadingAlertDialog();
 
-
-
-
-
-
-
-        //create3DNavigation(contentView);
-
         createViewsAndListeners();
     }
 
 
     private void createViewsAndListeners() {
-
-        //createContactDrawer();
-
-        createStatisticDrawer();
-
-        createNavigation();
 
         logo.setOnClickListener(v -> finish());
 
@@ -289,8 +180,45 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
         });
 
 
+        showStats.setOnClickListener(v -> statDrawer.openLayer(true));
 
+        hideStats.setOnClickListener(v -> statDrawer.closeLayer(true));
 
+        statDrawer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
+            @Override
+            public void onOpen() {
+                hideStats.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onShowPreview() {
+
+            }
+
+            @Override
+            public void onClose() {
+                showStats.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onOpened() {
+                showStats.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onPreviewShowed() {
+
+            }
+
+            @Override
+            public void onClosed() {
+                hideStats.setVisibility(View.INVISIBLE);
+
+            }
+        });
     }
 
     private FragmentTransaction createFragmentTransaction(String fragmentName) {
@@ -319,24 +247,9 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
         }
     }
 
-    private void createStatisticDrawer() {
 
 
-        drawer.setOnDrawerOpenListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.statshide)));
 
-        drawer.setOnDrawerCloseListener(() -> handle.setImageDrawable(getResources().getDrawable(R.drawable.stats)));
-    }
-
-
-    private void createNavigation() {
-/*
-        top.setOnClickListener(v -> bondModel.position().y -= 0.3f);
-        right.setOnClickListener(v -> bondModel.position().x -= 0.3f);
-        bottom.setOnClickListener(v -> bondModel.position().y += 0.3f);
-        left.setOnClickListener(v -> bondModel.position().x += 0.3f);
-*/
-
-    }
 
     public void createDialogFragment(int kind_of_dialog) {
 
@@ -346,21 +259,6 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
 
     }
 
-    private void resetModelPosition() {
-
-
-
-/*        holder.scale().x = initHolderScaleX;
-        holder.scale().y = initHolderScaleY;
-        holder.scale().z = initHolderScaleZ;
-
-        bondModel.position().x = initHolderPositionX;
-        bondModel.position().y = initHolderPositionY;
-
-        holder.rotation().x = initHolderRotationX;
-        holder.rotation().y = initHolderRotationY;*/
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -386,11 +284,6 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
         return super.onOptionsItemSelected(item);
     }
 
-    private float spacing(MotionEvent event) {
-        float x = event.getX(0) - event.getX(1);
-        float y = event.getY(0) - event.getY(1);
-        return (float) Math.sqrt(x * x + y * y);
-    }
 
     /**
      * starts the camera app and provides a pre defined file to store the pictuure
@@ -440,7 +333,14 @@ public class MainActivity extends AppCompatActivity implements ContactDrawerFrag
     @Override
     public void onBackPressed() {
         Log.d(TAG, "Back pressed");
+
+        finish();
+        contactFragment.closeDrawer();
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

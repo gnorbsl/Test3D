@@ -1,6 +1,7 @@
 package izm.fraunhofer.de.phoffmn.test3d.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -11,6 +12,7 @@ import org.rajawali3d.lights.PointLight;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
+import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Sphere;
 import org.rajawali3d.renderer.RajawaliRenderer;
 
@@ -27,35 +29,39 @@ public class Renderer extends RajawaliRenderer {
 
     public ArcballCamera arcball;
 
+    String objName;
+    AlertDialog alert;
 
-    public Renderer(Context context) {
+
+    public Renderer(Context context, String string, AlertDialog alert) {
         super(context);
         this.context = context;
         setFrameRate(60);
+        objName = string;
+        this.alert = alert;
     }
 
     @Override
     protected void initScene() {
 
 
-        LoaderOBJ objParser = new LoaderOBJ(context.getResources(), mTextureManager, R.raw.tamb100_obj);
 
-        PointLight mLight = new PointLight();
-        mLight.setPosition(4, 0, 4);
-        mLight.setPower(3);
 
-        PointLight mLight2 = new PointLight();
-        mLight.setPosition(-4, 0, -4);
-        mLight.setPower(3);
+        int objId = context.getResources().getIdentifier("raw/" + objName + "_obj",
+                "raw", context.getPackageName());
 
-        getCurrentScene().addLight(mLight);
-        getCurrentScene().addLight(mLight2);
+        LoaderOBJ objParser = new LoaderOBJ(context.getResources(), mTextureManager, objId);
+
+
 
         arcball = new ArcballCamera(mContext, ((Activity)mContext).findViewById(R.id.contentview));
 
+
         try {
             objParser.parse();
+
             mObjectGroup = objParser.getParsedObject();
+            mObjectGroup.setScale(0.7);
 
 
             getCurrentScene().addChild(mObjectGroup);
@@ -63,7 +69,7 @@ public class Renderer extends RajawaliRenderer {
 
             ModelFragment modelFragment = (ModelFragment) ((MainActivity)context).getFragmentManager().findFragmentByTag(MainActivity.CONTENT_FRAGMENT);
 
-            modelFragment.enableReset(arcball.getViewMatrix());
+            modelFragment.enableReset(arcball.getViewMatrix(), arcball.getFieldOfView());
 
 
 
@@ -71,7 +77,9 @@ public class Renderer extends RajawaliRenderer {
         } catch (ParsingException e) {
             e.printStackTrace();
         }
-        Sphere s = new Sphere(0.02f,5,5);
+
+        Sphere s = new Sphere(0.01f,5,5);
+
         s.setMaterial(new Material());
         getCurrentScene().addChild(s);
 
@@ -82,9 +90,11 @@ public class Renderer extends RajawaliRenderer {
 
         Log.d("ARC", " " + arcball.getOrientation());
 
-        arcball.setPosition(0,0,4);
+        arcball.setPosition(0, 0, 4);
 
         getCurrentScene().replaceAndSwitchCamera(getCurrentCamera(), arcball);
+
+        alert.cancel();
 
     }
 

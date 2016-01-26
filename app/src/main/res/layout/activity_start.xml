@@ -1,0 +1,294 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="izm.fraunhofer.de.phoffmn.test3d.activities.StartActivity">
+
+
+
+    <com.antonyt.infiniteviewpager.InfiniteViewPager
+        android:id="@+id/bondPager"
+        android:layout_width="500dp"
+        android:layout_height="90dp"
+        android:layout_centerHorizontal="true">
+    </com.antonyt.infiniteviewpager.InfiniteViewPager>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leftButton"
+        android:background="@drawable/navigation_imagebutton_selector"
+        android:src="@drawable/ic_arrow_back_white_36dp"
+        android:layout_alignTop="@+id/rightButton"
+        android:layout_alignLeft="@+id/bondPager"
+        android:layout_alignStart="@+id/bondPager" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rightButton"
+        android:layout_alignRight="@id/bondPager"
+        android:layout_alignEnd="@id/bondPager"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/navigation_imagebutton_selector"
+        android:src="@drawable/ic_arrow_forward_white_36dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/middlepart"
+        android:layout_below="@+id/bondPager"
+        android:src="@drawable/complete_no_wire_new_small_lines_no_cooler"
+        android:layout_centerHorizontal="true"/>
+
+    <com.antonyt.infiniteviewpager.InfiniteViewPager
+        android:id="@+id/coolerPager"
+        android:layout_width="500dp"
+        android:layout_height="155dp"
+        android:layout_below="@+id/middlepart"
+        android:layout_centerHorizontal="true">
+    </com.antonyt.infiniteviewpager.InfiniteViewPager>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leftButtonCooler"
+        android:background="@drawable/navigation_imagebutton_selector"
+        android:src="@drawable/ic_arrow_back_white_36dp"
+        android:layout_alignBottom="@+id/coolerPager"
+        android:layout_alignLeft="@+id/leftButton"
+        android:layout_alignStart="@+id/leftButton"
+        android:layout_marginBottom="58dp" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rightButtonCooler"
+        android:background="@drawable/navigation_imagebutton_selector"
+        android:src="@drawable/ic_arrow_forward_white_36dp"
+        android:layout_alignTop="@+id/leftButtonCooler"
+        android:layout_alignLeft="@+id/rightButton"
+        android:layout_alignStart="@+id/rightButton" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Bond 100"
+        android:visibility="gone"
+        android:id="@+id/button100"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Bond 20"
+        android:visibility="gone"
+        android:id="@+id/button20"
+        android:layout_below="@+id/button100"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Materials:"
+        android:id="@+id/materials"
+        android:layout_alignTop="@+id/button100"
+        android:layout_toRightOf="@+id/bondPager"
+        android:layout_toEndOf="@+id/bondPager" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Silicon"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/bondPager"
+        android:layout_alignLeft="@+id/materials"
+        android:layout_alignStart="@+id/materials"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Sintered Silver"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aluminium"
+        android:id="@+id/textView10"
+        android:layout_alignTop="@+id/rightButtonCooler"
+        android:layout_alignLeft="@+id/textView13"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Copper"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/textView9"
+        android:layout_alignLeft="@+id/textView9"
+        android:layout_alignStart="@+id/textView9"
+        android:layout_marginTop="-7dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aluminium"
+        android:id="@+id/textView12"
+        android:layout_below="@+id/materials"
+        android:layout_toRightOf="@+id/bondPager"
+        android:layout_toEndOf="@+id/bondPager"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Copper"
+        android:id="@+id/textView13"
+        android:layout_marginTop="59dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_alignStart="@+id/textView11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Ceramics"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/textView11"
+        android:layout_alignLeft="@+id/textView13"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginTop="17dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/bondInfo"
+        android:layout_alignTop="@+id/leftButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/coolerInfo"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_alignLeft="@+id/bondInfo"
+        android:layout_alignStart="@+id/bondInfo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/circle"
+        android:layout_alignTop="@+id/tambientSeekBar"
+        android:layout_alignLeft="@+id/coolerPager"
+        android:layout_alignStart="@+id/coolerPager"
+        android:layout_marginTop="-8dp"
+        android:layout_marginLeft="28dp" />
+
+    <SeekBar
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tambientSeekBar"
+        android:max="80"
+        android:longClickable="false"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/temgradient"
+        android:layout_below="@+id/coolerPager"
+        android:layout_toRightOf="@+id/leftButtonCooler"
+        android:layout_toLeftOf="@+id/rightButtonCooler"
+        android:layout_toStartOf="@+id/rightButtonCooler" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Ambient Temperature"
+        android:id="@+id/textView15"
+        android:layout_alignBottom="@+id/tambientSeekBar"
+        android:layout_alignTop="@+id/tambientSeekBar"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="100°C"
+        android:id="@+id/textView16"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_alignRight="@+id/tambientSeekBar"
+        android:layout_alignEnd="@+id/tambientSeekBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="20°C"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/tambientSeekBar"
+        android:layout_alignLeft="@+id/tambientSeekBar"
+        android:layout_alignStart="@+id/tambientSeekBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/currentTemp"
+        android:text="20°C"
+        android:gravity="center_vertical"
+        android:layout_above="@+id/textView16"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_alignTop="@+id/tambientSeekBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="60°C"
+        android:id="@+id/textView18"
+        android:layout_marginLeft="150dp"
+        android:layout_marginStart="149dp"
+        android:layout_below="@+id/tambientSeekBar"
+        android:layout_toRightOf="@+id/textView17"
+        android:layout_toEndOf="@+id/textView17" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Lifetime Calculation"
+        android:id="@+id/startLifetime"
+        android:layout_below="@+id/textView16"
+        android:layout_alignRight="@+id/textView10"
+        android:layout_alignEnd="@+id/textView10"
+        android:layout_marginTop="78dp"
+        android:padding="5dp"
+        android:background="@drawable/resetbuttondrawable"/>
+
+
+</RelativeLayout>

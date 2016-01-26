@@ -1,6 +1,8 @@
 package izm.fraunhofer.de.phoffmn.test3d.fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -26,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.activities.Renderer;
+import izm.fraunhofer.de.phoffmn.test3d.activities.StartActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,8 +39,18 @@ public class ModelFragment extends Fragment{
     private Renderer mRenderer;
 
     Button resetView;
-    private Matrix4 viewMatrix;
     private ImageButton top, bottom, left, right;
+    private Matrix4 defaultViewMatrix;
+    private double defaultFOV;
+
+
+    public static ModelFragment newInstance(String string) {
+        ModelFragment fragment = new ModelFragment();
+        Bundle args = new Bundle();
+        args.putString(StartActivity.BOND_DIAMETER, string);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public ModelFragment() {
 
@@ -97,7 +110,16 @@ public class ModelFragment extends Fragment{
         // Find the TextureView
         IRajawaliSurface mRajawaliSurface = (IRajawaliSurface) mLayout.findViewById(R.id.rajwali_surface);
 
-        mRenderer = new Renderer(getActivity());
+        View dialoglayout = inflater.inflate(R.layout.loading_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialoglayout);
+        builder.setCancelable(false);
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+        mRenderer = new Renderer(getActivity(), getArguments().getString(StartActivity.BOND_DIAMETER), alert);
 
         mRajawaliSurface.setSurfaceRenderer(mRenderer);
 
@@ -111,25 +133,22 @@ public class ModelFragment extends Fragment{
                 mRenderer.getObject().setY(0);
                 mRenderer.getObject().setZ(0);
 
-                Log.d("BLA", mRenderer.getCurrentCamera().getRotX() + "");
 
-
+                mRenderer.getObject().setRotation(defaultViewMatrix);
+               mRenderer.getCurrentCamera().setFieldOfView(defaultFOV);
 
             }
         });
-
-
 
         return mLayout;
     }
 
 
 
-    public void enableReset(Matrix4 viewMatrix) {
+    public void enableReset(Matrix4 viewMatrix, double fov) {
 
-
-        this.viewMatrix = viewMatrix;
-
+        defaultViewMatrix = viewMatrix;
+        defaultFOV = fov;
         getActivity().runOnUiThread(() -> resetView.setEnabled(true));
     }
 }

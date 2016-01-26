@@ -59,139 +59,221 @@
         android:visibility="invisible"/>
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/tub_logo_new"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/logo"
+        android:layout_toStartOf="@id/logo"/>
+
+    <ImageView
         android:id="@+id/ninepatch"
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/ninepatch"
-        android:visibility="invisible" />
+        android:layout_marginTop="16dp" />
 
-    <LinearLayout
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/showStats"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/ninepatch"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="48dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="invisible">
+        android:text="Show Statistics"
+        android:background="@drawable/resetbuttondrawable"/>
 
 
 
-
-
-
-    </LinearLayout>
-
-
-    <hollowsoft.slidingdrawer.SlidingDrawer
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        drawer:content="@+id/content2"
-        drawer:handle="@+id/handle">
-
-        <ImageView
-            android:id="@+id/handle"
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/teststatsdrawable"
-            android:gravity="center"
-            android:src="@drawable/stats" />
-
+    <com.wunderlist.slidinglayer.SlidingLayer
+        xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidingLayer1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        slidingLayer:stickTo="right"
+        android:layout_below="@id/ninepatch"
+        slidingLayer:changeStateOnTap="true">
 
         <RelativeLayout
-            android:id="@+id/content2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/fraunhofergreen"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/firstdiagram"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/hideStats"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/formel"
-                android:gravity="center"
-                android:src="@drawable/dummydiagram" />
-
-            <ImageView
-                android:id="@+id/formel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/firstdiagram"
-                android:gravity="center"
-                android:src="@drawable/dummyformel" />
-
-            <ImageView
-                android:id="@+id/seconddiagram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@id/formel"
-                android:gravity="center"
-                android:src="@drawable/dummydiagramm3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/formel"
-                android:layout_alignRight="@id/formel"
-                android:layout_below="@+id/formel"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
-                android:textColor="@color/abc_primary_text_material_dark" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/firstdiagram"
-                android:layout_alignRight="@+id/firstdiagram"
-                android:layout_below="@id/firstdiagram"
-                android:layout_gravity="right|bottom"
-
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
-                android:textColor="@color/abc_primary_text_material_dark" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/seconddiagram"
+                android:layout_marginBottom="60dp"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/seconddiagram"
-                android:layout_gravity="left|bottom"
-                android:gravity="left"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
-                android:textColor="@color/abc_primary_text_material_dark" />
+                android:background="@drawable/resetbuttondrawable"
+                android:text="Hide Statistics"/>
+
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="17sp"
+                android:text="Temperature:" />
+
+            <TextView
+                android:id="@+id/tambient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:layout_below="@id/temperature"
+                android:text="Tambient:" />
+            <TextView
+                android:id="@+id/tambient_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="100°C"
+                android:layout_below="@+id/temperature"
+                android:layout_toRightOf="@+id/tambient"
+                android:layout_toEndOf="@+id/tambient"
+                android:layout_marginLeft="4dp" />
+            <TextView
+                android:id="@+id/tmax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="Tmax:"
+                android:layout_below="@+id/tambient"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/tmax_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="250°C"
+                android:layout_below="@+id/tambient_data"
+                android:layout_alignLeft="@+id/tambient_data"
+                android:layout_alignStart="@+id/tambient_data" />
+            <TextView
+                android:id="@+id/stress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="15dip"
+                android:textSize="17sp"
+                android:layout_below="@id/tmax"
+                android:text="Stress:" />
+
+            <TextView
+                android:id="@+id/info_text_stress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="Maximum loading at the die-wirebond interface."
+                android:layout_below="@+id/stress"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/stress_cte_die"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="CTE die:"
+                android:layout_below="@+id/info_text_stress"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/cte_die_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="2.8 ppm/K"
+                android:layout_below="@+id/info_text_stress"
+                android:layout_alignLeft="@+id/cte_wirebond_data"
+                android:layout_alignStart="@+id/cte_wirebond_data" />
+
+            <TextView
+                android:id="@+id/stress_cte_wirebond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="CTE Wirebond:"
+                android:layout_below="@+id/stress_cte_die"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/cte_wirebond_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="23 ppm/K"
+                android:layout_below="@+id/cte_die_data"
+                android:layout_toRightOf="@+id/tmax_data"
+                android:layout_toEndOf="@+id/tmax_data" />
+
+            <TextView
+                android:id="@+id/lifetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="17sp"
+                android:text="Estimated Lifetime:"
+                android:layout_below="@+id/stress_cte_wirebond"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/lifetime_cycle_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="35"
+                android:layout_below="@+id/lifetime"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/lifetime_cycle_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dip"
+                android:textSize="12sp"
+                android:text="Cycles"
+                android:layout_below="@+id/lifetime"
+                android:layout_toRightOf="@+id/lifetime_cycle_data"
+                android:layout_toEndOf="@+id/lifetime_cycle_data" />
+
 
         </RelativeLayout>
 
 
-    </hollowsoft.slidingdrawer.SlidingDrawer>
+    </com.wunderlist.slidinglayer.SlidingLayer>
+
 
     <Button
         android:id="@+id/showdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:visibility="gone"
         android:text="Show stored data" />
 
     <Button
@@ -199,6 +281,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/showdata"
+        android:visibility="gone"
         android:text="delete stored data" />
 
 

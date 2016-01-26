@@ -33,6 +33,11 @@ public class ContactDrawerFragment extends Fragment {
     //interface to communicate with the activity
     ContactFragmentInterface contactFragmentInterface;
 
+    public void closeDrawer() {
+        if (drawerContact.isOpened())
+        drawerContact.animateClose();
+    }
+
     public interface ContactFragmentInterface {
         void dispatchTakePictureIntent();
         void createDialogFragment(int kind_of_dialog);
@@ -84,6 +89,8 @@ public class ContactDrawerFragment extends Fragment {
 
         drawerContact.setVisibility(View.VISIBLE);
     }
+
+
 
 
 

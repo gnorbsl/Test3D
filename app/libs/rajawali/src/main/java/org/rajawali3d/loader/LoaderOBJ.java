@@ -139,7 +139,6 @@ public class LoaderOBJ extends AMeshLoader {
 		Object3D currentGroup = mRootObject;
 		mRootObject.setName("default");
 		Map<String, Object3D> groups = new HashMap<String, Object3D>();
-		
 		try {
 			while((line = buffer.readLine()) != null) {
 				// Skip comments and empty lines.
