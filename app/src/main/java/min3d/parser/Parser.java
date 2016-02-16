@@ -30,14 +30,12 @@ public class Parser {
         return null;
     }
 
-    ;
-
     /**
      * Parser types enum
      *
      * @author dennis.ippel
      */
-    public static enum Type {
+    public enum Type {
         OBJ, MAX_3DS, MD2
     }
 }

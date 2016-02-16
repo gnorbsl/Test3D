@@ -20,20 +20,20 @@ public interface ISceneController {
      * <p/>
      * It would be the end-user's responsibility to save and restore state if so desired...
      */
-    public void initScene();
+    void initScene();
 
     /**
      * Updating properties of scene objects happens here.
      * This is called on every frame right before the render routine.
      */
-    public void updateScene();
+    void updateScene();
 
 
-    public Handler getInitSceneHandler();
+    Handler getInitSceneHandler();
 
-    public Runnable getInitSceneRunnable();
+    Runnable getInitSceneRunnable();
 
-    public Handler getUpdateSceneHandler();
+    Handler getUpdateSceneHandler();
 
-    public Runnable getUpdateSceneRunnable();
+    Runnable getUpdateSceneRunnable();
 }

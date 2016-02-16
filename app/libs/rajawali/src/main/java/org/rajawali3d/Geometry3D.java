@@ -12,6 +12,16 @@
  */
 package org.rajawali3d;
 
+import android.graphics.Color;
+import android.opengl.GLES20;
+
+import org.rajawali3d.animation.mesh.VertexAnimationObject3D;
+import org.rajawali3d.bounds.BoundingBox;
+import org.rajawali3d.bounds.BoundingSphere;
+import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.renderer.RajawaliRenderer;
+import org.rajawali3d.util.RajLog;
+
 import java.nio.Buffer;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
@@ -20,15 +30,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.Arrays;
-
-import org.rajawali3d.animation.mesh.VertexAnimationObject3D;
-import org.rajawali3d.bounds.BoundingBox;
-import org.rajawali3d.bounds.BoundingSphere;
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.renderer.RajawaliRenderer;
-import org.rajawali3d.util.RajLog;
-import android.graphics.Color;
-import android.opengl.GLES20;
 
 /**
  * This is where the vertex, normal, texture coordinate, color and index data is stored.

@@ -12,14 +12,14 @@
  */
 package org.rajawali3d.materials.textures;
 
-import java.nio.ByteBuffer;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
+
+import java.nio.ByteBuffer;
 
 /**
  * This class is used to specify texture options.

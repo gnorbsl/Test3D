@@ -15,6 +15,10 @@ package org.rajawali3d.loader;
 import android.content.res.Resources;
 import android.os.Environment;
 
+import org.rajawali3d.renderer.RajawaliRenderer;
+import org.rajawali3d.util.LittleEndianDataInputStream;
+import org.rajawali3d.util.RajLog;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,10 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Locale;
-
-import org.rajawali3d.renderer.RajawaliRenderer;
-import org.rajawali3d.util.LittleEndianDataInputStream;
-import org.rajawali3d.util.RajLog;
 
 public abstract class ALoader implements ILoader {
 

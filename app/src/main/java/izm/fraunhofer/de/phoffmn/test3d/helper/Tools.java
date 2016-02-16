@@ -3,7 +3,6 @@ package izm.fraunhofer.de.phoffmn.test3d.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;

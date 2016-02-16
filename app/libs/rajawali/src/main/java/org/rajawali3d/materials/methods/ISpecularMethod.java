@@ -12,12 +12,12 @@
  */
 package org.rajawali3d.materials.methods;
 
-import java.util.List;
-
 import org.rajawali3d.lights.ALight;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.shaders.IShaderFragment;
 import org.rajawali3d.materials.textures.ATexture;
+
+import java.util.List;
 
 
 public interface ISpecularMethod {

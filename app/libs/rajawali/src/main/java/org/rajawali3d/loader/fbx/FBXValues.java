@@ -12,11 +12,12 @@
  */
 package org.rajawali3d.loader.fbx;
 
-import java.util.Stack;
+import android.graphics.Color;
 
 import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
-import android.graphics.Color;
+
+import java.util.Stack;
 
 public class FBXValues {
 	public static final String MODELTYPE_CAMERA_SWITCHER = "CameraSwitcher";

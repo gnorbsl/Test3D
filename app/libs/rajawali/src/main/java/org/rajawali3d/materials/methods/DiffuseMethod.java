@@ -12,18 +12,18 @@
  */
 package org.rajawali3d.materials.methods;
 
-import java.util.List;
-
 import android.graphics.Color;
 
 import org.rajawali3d.lights.ALight;
 import org.rajawali3d.materials.Material;
-import org.rajawali3d.materials.shaders.IShaderFragment;
 import org.rajawali3d.materials.shaders.AShaderBase.DataType;
 import org.rajawali3d.materials.shaders.AShaderBase.IGlobalShaderVar;
+import org.rajawali3d.materials.shaders.IShaderFragment;
 import org.rajawali3d.materials.shaders.fragments.diffuse.LambertFragmentShaderFragment;
 import org.rajawali3d.materials.shaders.fragments.diffuse.LambertVertexShaderFragment;
 import org.rajawali3d.materials.shaders.fragments.effects.ToonFragmentShaderFragment;
+
+import java.util.List;
 
 
 /**

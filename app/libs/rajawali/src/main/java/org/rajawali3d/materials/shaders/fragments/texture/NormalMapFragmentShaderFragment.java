@@ -14,8 +14,11 @@ package org.rajawali3d.materials.shaders.fragments.texture;
 
 import java.util.List;
 
-import org.rajawali3d.materials.Material.PluginInsertLocation;
-import org.rajawali3d.materials.textures.ATexture;
+import org.rajawali3d.materials.Materi
+l.Plug nInsertLocation;
+import org.rajawali3d.mate
+
+als.te tures.ATexture;
 
 
 public class NormalMapFragmentShaderFragment extends ATextureFragmentShaderFragment {

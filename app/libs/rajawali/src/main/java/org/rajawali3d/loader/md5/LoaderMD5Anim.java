@@ -12,24 +12,24 @@
  */
 package org.rajawali3d.loader.md5;
 
+import org.rajawali3d.animation.mesh.IAnimationSequence;
+import org.rajawali3d.animation.mesh.SkeletalAnimationFrame;
+import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.Skeleton;
+import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.SkeletonJoint;
+import org.rajawali3d.animation.mesh.SkeletalAnimationSequence;
+import org.rajawali3d.loader.ALoader;
+import org.rajawali3d.loader.IAnimationSequenceLoader;
+import org.rajawali3d.loader.ParsingException;
+import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.renderer.RajawaliRenderer;
+import org.rajawali3d.util.RajLog;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
-import org.rajawali3d.animation.mesh.IAnimationSequence;
-import org.rajawali3d.animation.mesh.SkeletalAnimationFrame;
-import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.Skeleton;
-import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.SkeletonJoint;
-import org.rajawali3d.animation.mesh.SkeletalAnimationSequence;
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.loader.ALoader;
-import org.rajawali3d.loader.IAnimationSequenceLoader;
-import org.rajawali3d.loader.ParsingException;
-import org.rajawali3d.renderer.RajawaliRenderer;
-import org.rajawali3d.util.RajLog;
 
 public class LoaderMD5Anim extends ALoader implements IAnimationSequenceLoader {
 	private static final String MD5_VERSION = "MD5Version";

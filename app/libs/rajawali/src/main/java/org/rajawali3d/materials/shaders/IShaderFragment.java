@@ -12,11 +12,11 @@
  */
 package org.rajawali3d.materials.shaders;
 
-import java.util.Hashtable;
-
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.Material.PluginInsertLocation;
 import org.rajawali3d.materials.shaders.AShaderBase.ShaderVar;
+
+import java.util.Hashtable;
 
 
 

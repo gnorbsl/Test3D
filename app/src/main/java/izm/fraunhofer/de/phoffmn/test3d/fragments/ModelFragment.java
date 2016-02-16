@@ -2,30 +2,21 @@ package izm.fraunhofer.de.phoffmn.test3d.fragments;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.os.Bundle;
 import android.app.Fragment;
-import android.os.Handler;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import org.rajawali3d.cameras.ArcballCamera;
+import org.rajawali3d.materials.Material;
 import org.rajawali3d.math.Matrix4;
-import org.rajawali3d.math.Quaternion;
-import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.surface.IRajawaliSurface;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.activities.Renderer;
 import izm.fraunhofer.de.phoffmn.test3d.activities.StartActivity;
@@ -87,6 +78,11 @@ public class ModelFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 mRenderer.getObject().setX(mRenderer.getObject().getX() - .1);
+
+                Log.d("MAT", "onClick " + mRenderer.getObject().getMaterial());
+                Material m = new Material();
+                m.setColor(Color.GREEN);
+                mRenderer.getObject().setMaterial(m);
             }
         });
 

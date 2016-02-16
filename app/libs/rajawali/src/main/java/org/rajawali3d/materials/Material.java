@@ -16,7 +16,6 @@ import android.graphics.Color;
 import android.opengl.GLES20;
 
 import org.rajawali3d.BufferInfo;
-import org.rajawali3d.util.Capabilities;
 import org.rajawali3d.Object3D;
 import org.rajawali3d.lights.ALight;
 import org.rajawali3d.materials.methods.DiffuseMethod;
@@ -40,9 +39,9 @@ import org.rajawali3d.materials.textures.CubeMapTexture;
 import org.rajawali3d.materials.textures.SphereMapTexture;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.math.Matrix4;
-import org.rajawali3d.renderer.AFrameTask;
 import org.rajawali3d.renderer.RajawaliRenderer;
 import org.rajawali3d.scene.RajawaliScene;
+import org.rajawali3d.util.Capabilities;
 import org.rajawali3d.util.RajLog;
 
 import java.util.ArrayList;

@@ -3,26 +3,16 @@ package izm.fraunhofer.de.phoffmn.test3d.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.io.File;
-import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hollowsoft.slidingdrawer.SlidingDrawer;
 import izm.fraunhofer.de.phoffmn.test3d.R;
-import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
 
 
 /**
@@ -68,7 +58,7 @@ public class ContactDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = (View) inflater.inflate(R.layout.fragment_contact, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
         ButterKnife.bind(this, view);
 
         return view;

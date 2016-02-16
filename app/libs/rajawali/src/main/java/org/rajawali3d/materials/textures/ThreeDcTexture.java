@@ -14,7 +14,9 @@ package org.rajawali3d.materials.textures;
 
 import java.nio.ByteBuffer;
 
-import android.opengl.GLES11Ext;
+imp
+
+t andr id.opengl.GLES11Ext;
 
 public class ThreeDcTexture extends ACompressedTexture {
 

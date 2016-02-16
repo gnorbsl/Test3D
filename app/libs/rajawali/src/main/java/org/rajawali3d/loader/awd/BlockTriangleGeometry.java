@@ -1,7 +1,5 @@
 package org.rajawali3d.loader.awd;
 
-import java.util.ArrayList;
-
 import android.util.SparseArray;
 
 import org.apache.http.ParseException;
@@ -13,6 +11,8 @@ import org.rajawali3d.animation.mesh.SkeletalAnimationObject3D;
 import org.rajawali3d.loader.LoaderAWD.AWDLittleEndianDataInputStream;
 import org.rajawali3d.loader.LoaderAWD.BlockHeader;
 import org.rajawali3d.util.RajLog;
+
+import java.util.ArrayList;
 
 /**
  * The TriangleGeometry block describes a single mesh of an AWD file. Multiple TriangleGeometry blocks may exists in a

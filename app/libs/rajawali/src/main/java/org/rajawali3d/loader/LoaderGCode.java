@@ -12,6 +12,19 @@
  */
 package org.rajawali3d.loader;
 
+import android.content.res.Resources;
+import android.content.res.Resources.NotFoundException;
+import android.graphics.Color;
+import android.util.Log;
+
+import org.rajawali3d.Object3D;
+import org.rajawali3d.loader.LoaderSTL.StlParseException;
+import org.rajawali3d.materials.textures.TextureManager;
+import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.primitives.Line3D;
+import org.rajawali3d.renderer.RajawaliRenderer;
+import org.rajawali3d.util.RajLog;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,18 +33,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Stack;
-
-import org.rajawali3d.Object3D;
-import org.rajawali3d.materials.textures.TextureManager;
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.loader.LoaderSTL.StlParseException;
-import org.rajawali3d.primitives.Line3D;
-import org.rajawali3d.renderer.RajawaliRenderer;
-import org.rajawali3d.util.RajLog;
-import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
-import android.graphics.Color;
-import android.util.Log;
 
 /**
  * @author fbeachler

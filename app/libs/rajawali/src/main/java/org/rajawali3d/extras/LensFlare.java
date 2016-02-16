@@ -12,10 +12,10 @@
  */
 package org.rajawali3d.extras;
 
-import java.util.ArrayList;
-
 import org.rajawali3d.materials.textures.ASingleTexture;
 import org.rajawali3d.math.vector.Vector3;
+
+import java.util.ArrayList;
 
 /**
  * LensFlare effects class for adding lens flare to the renderer.

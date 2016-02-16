@@ -1,11 +1,12 @@
 package org.rajawali3d.loader.awd;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.rajawali3d.loader.LoaderAWD.AWDLittleEndianDataInputStream;
 import org.rajawali3d.loader.LoaderAWD.BlockHeader;
 import org.rajawali3d.loader.awd.exceptions.NotImplementedParsingException;
 import org.rajawali3d.util.RajLog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 /**
  * 

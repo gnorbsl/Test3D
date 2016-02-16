@@ -12,16 +12,17 @@
  */
 package org.rajawali3d.curves;
 
+import android.content.Context;
+
+import org.rajawali3d.math.vector.Vector3;
+import org.rajawali3d.util.RajLog;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.util.RajLog;
-import android.content.Context;
 
 /**
  * Parses a path from an SVG string. Please bear in mind that this is not a full XML parser.

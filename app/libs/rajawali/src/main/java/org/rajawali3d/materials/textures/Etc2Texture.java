@@ -7,13 +7,13 @@ import android.opengl.ETC1;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES30;
 
+import org.rajawali3d.materials.textures.utils.ETC2Util;
+import org.rajawali3d.util.RajLog;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-
-import org.rajawali3d.materials.textures.utils.ETC2Util;
-import org.rajawali3d.util.RajLog;
 
 /**
  * Rajawali container for an ETC2 texture. Due to the nature of ETC2 textures, you may also use this to load

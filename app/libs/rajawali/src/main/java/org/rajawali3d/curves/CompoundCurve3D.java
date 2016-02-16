@@ -12,9 +12,9 @@
  */
 package org.rajawali3d.curves;
 
-import java.util.Stack;
-
 import org.rajawali3d.math.vector.Vector3;
+
+import java.util.Stack;
 
 public class CompoundCurve3D implements ICurve3D {
 	protected static final double DELTA = .000001;

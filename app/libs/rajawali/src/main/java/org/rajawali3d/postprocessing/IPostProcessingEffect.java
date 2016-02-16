@@ -12,9 +12,9 @@
  */
 package org.rajawali3d.postprocessing;
 
-import java.util.List;
-
 import org.rajawali3d.renderer.RajawaliRenderer;
+
+import java.util.List;
 
 
 public interface IPostProcessingEffect extends IPostProcessingComponent {

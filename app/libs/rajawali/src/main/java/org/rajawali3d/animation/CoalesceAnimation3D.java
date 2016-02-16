@@ -1,12 +1,12 @@
 package org.rajawali3d.animation;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.rajawali3d.ATransformable3D;
 import org.rajawali3d.curves.ASpiral3D;
 import org.rajawali3d.math.vector.Vector3;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * {@link ATransformable3D} Coalescence animation. This animation <i>ROUGHLY</i> approximates a decaying orbit.

@@ -1,5 +1,7 @@
 package org.rajawali3d.loader.awd;
 
+import android.util.SparseArray;
+
 import org.rajawali3d.Object3D;
 import org.rajawali3d.animation.mesh.IAnimationSequence;
 import org.rajawali3d.animation.mesh.SkeletalAnimationChildObject3D;
@@ -13,8 +15,6 @@ import org.rajawali3d.loader.LoaderAWD.BlockHeader;
 import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.plugins.SkeletalAnimationMaterialPlugin;
 import org.rajawali3d.math.Matrix4;
-
-import android.util.SparseArray;
 
 /**
  * This class is responsible for binding a BlockMeshInstance to a BlockSkeleton

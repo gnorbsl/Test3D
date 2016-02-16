@@ -12,9 +12,9 @@
  */
 package org.rajawali3d.materials.textures;
 
-import java.nio.ByteBuffer;
-
 import android.opengl.GLES11Ext;
+
+import java.nio.ByteBuffer;
 
 public class AtcTexture extends ACompressedTexture {
 

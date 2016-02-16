@@ -1,7 +1,8 @@
 package org.rajawali3d.loader.awd;
 
-import java.util.HashMap;
-import java.util.UUID;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.util.SparseArray;
 
 import org.rajawali3d.loader.LoaderAWD.AWDLittleEndianDataInputStream;
 import org.rajawali3d.loader.LoaderAWD.AwdProperties;
@@ -16,9 +17,8 @@ import org.rajawali3d.materials.textures.SpecularMapTexture;
 import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.util.RajLog;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.util.SparseArray;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * FIXME Implement 'materialMode' as described by Away3D materialMode block comment

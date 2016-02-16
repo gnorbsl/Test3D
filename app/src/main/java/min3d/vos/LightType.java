@@ -7,7 +7,7 @@ public enum LightType {
 
     private final float _glValue;
 
-    private LightType(float $glValue) {
+    LightType(float $glValue) {
         _glValue = $glValue;
     }
 

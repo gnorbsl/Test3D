@@ -12,12 +12,12 @@
  */
 package org.rajawali3d.loader.awd;
 
-import java.io.IOException;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.loader.LoaderAWD;
 import org.rajawali3d.loader.LoaderAWD.IBlockParser;
 import org.rajawali3d.util.LittleEndianDataInputStream;
+
+import java.io.IOException;
 
 /**
  * Base class for parsing blocks. Blocks are instantiated by the {@link LoaderAWD} directly and are not intended for any

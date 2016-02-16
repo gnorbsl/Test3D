@@ -1,12 +1,13 @@
 package org.rajawali3d.loader.awd;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+
+import org.rajawali3d.loader.LoaderAWD.IBlockParser;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.textures.ATexture;
 import org.rajawali3d.materials.textures.CubeMapTexture;
 import org.rajawali3d.materials.textures.Texture;
-import org.rajawali3d.loader.LoaderAWD.IBlockParser;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 
 /**
  * Base class for parsing blocks. Blocks are instantiated by the {@link AWDParser} directly and are not intended for any

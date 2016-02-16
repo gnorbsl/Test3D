@@ -1,9 +1,9 @@
 package min3d.interfaces;
 
 public interface IDirtyManaged {
-    public boolean isDirty();
+    boolean isDirty();
 
-    public void setDirtyFlag();
+    void setDirtyFlag();
 
-    public void clearDirtyFlag();
+    void clearDirtyFlag();
 }

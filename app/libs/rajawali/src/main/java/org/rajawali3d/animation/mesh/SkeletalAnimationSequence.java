@@ -12,11 +12,11 @@
  */
 package org.rajawali3d.animation.mesh;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.SkeletonJoint;
 import org.rajawali3d.animation.mesh.SkeletalAnimationObject3D.SkeletalAnimationException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkeletalAnimationSequence implements IAnimationSequence {
 	private SkeletalAnimationFrame[] mFrames;

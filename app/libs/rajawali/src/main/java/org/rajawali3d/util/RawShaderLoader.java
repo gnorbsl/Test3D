@@ -1,13 +1,13 @@
 package org.rajawali3d.util;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.res.Resources;
 
 
 /**

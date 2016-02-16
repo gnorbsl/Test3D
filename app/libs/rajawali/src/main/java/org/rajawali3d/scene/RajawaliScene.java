@@ -16,9 +16,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.opengl.GLES20;
 
-import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.Object3D;
 import org.rajawali3d.animation.Animation;
+import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.lights.ALight;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.plugins.FogMaterialPlugin;

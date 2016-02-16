@@ -14,16 +14,16 @@ package org.rajawali3d.bounds;
 
 import android.opengl.GLES20;
 
-import java.nio.FloatBuffer;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.Geometry3D;
 import org.rajawali3d.Object3D;
+import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.primitives.Cube;
+
+import java.nio.FloatBuffer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BoundingBox implements IBoundingVolume {
 	protected Geometry3D mGeometry;

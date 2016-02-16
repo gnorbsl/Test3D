@@ -15,8 +15,9 @@
  */
 package org.rajawali3d.materials.textures;
 
-import org.rajawali3d.materials.textures.TexturePacker.Tile;
 import android.graphics.Bitmap;
+
+import org.rajawali3d.materials.textures.TexturePacker.Tile;
 
 public class TextureAtlas {
 	/**

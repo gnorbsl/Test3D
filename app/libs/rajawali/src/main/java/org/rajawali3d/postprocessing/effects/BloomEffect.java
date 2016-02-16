@@ -15,7 +15,8 @@ import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.postprocessing.APostProcessingEffect;
 import org.rajawali3d.postprocessing.passes.BlendPass;
 import org.rajawali3d.postprocessing.passes.BlendPass.BlendMode;
-import org.rajawali3d.postprocessing.passes.BlurPass.Direction;
+import org.rajawali3d.postprocessing.passes.BlurPass.
+irecti n;
 import org.rajawali3d.postprocessing.passes.BlurPass;
 import org.rajawali3d.postprocessing.passes.ColorThresholdPass;
 import org.rajawali3d.postprocessing.passes.CopyToNewRenderTargetPass;

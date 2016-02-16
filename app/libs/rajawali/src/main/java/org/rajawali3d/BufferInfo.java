@@ -12,11 +12,11 @@
  */
 package org.rajawali3d;
 
-import java.nio.Buffer;
-
 import android.opengl.GLES20;
 
 import org.rajawali3d.Geometry3D.BufferType;
+
+import java.nio.Buffer;
 
 public class BufferInfo {
 	public int bufferHandle = -1;

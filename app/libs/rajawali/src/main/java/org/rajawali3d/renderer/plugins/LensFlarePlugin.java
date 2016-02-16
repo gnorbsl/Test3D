@@ -14,8 +14,6 @@ package org.rajawali3d.renderer.plugins;
 
 import android.opengl.GLES20;
 
-import java.util.Stack;
-
 import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.extras.LensFlare;
 import org.rajawali3d.extras.LensFlare.FlareInfo;
@@ -24,6 +22,8 @@ import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.vector.Vector2;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.renderer.RajawaliRenderer;
+
+import java.util.Stack;
 
 
 /**

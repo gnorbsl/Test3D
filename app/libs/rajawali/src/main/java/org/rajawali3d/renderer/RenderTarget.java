@@ -12,14 +12,15 @@
  */
 package org.rajawali3d.renderer;
 
+import android.graphics.Bitmap.Config;
+import android.opengl.GLES20;
+import android.opengl.GLU;
+
 import org.rajawali3d.materials.textures.ATexture.FilterType;
 import org.rajawali3d.materials.textures.ATexture.WrapType;
 import org.rajawali3d.materials.textures.RenderTargetTexture;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.util.RajLog;
-import android.graphics.Bitmap.Config;
-import android.opengl.GLES20;
-import android.opengl.GLU;
 
 /**
  * Defines configurations for a given render target.

@@ -14,12 +14,19 @@ package org.rajawali3d.materials.shaders.fragments.diffuse;
 
 import java.util.List;
 
-import org.rajawali3d.lights.ALight;
-import org.rajawali3d.materials.Material.PluginInsertLocation;
-import org.rajawali3d.materials.methods.DiffuseMethod.DiffuseShaderVar;
-import org.rajawali3d.materials.shaders.AShader;
-import org.rajawali3d.materials.shaders.IShaderFragment;
-import org.rajawali3d.materials.shaders.fragments.LightsVertexShaderFragment.LightsShaderVar;
+import org.r
+jawali d.lights.ALight;
+import org.rajawali3d.materials.Materi
+l.Plug nInsertLocation;
+import org.rajawali3d.materials.methods.Diffuse
+ethod. iffuseShaderVar;
+import org.rajawali3d.ma
+erials shaders.AShader;
+import org.rajawali3d.materials.
+haders IShaderFragment;
+import org.rajawali3d.materials.shaders.fragments.LightsVertexShaderF
+
+gment. ightsShaderVar;
 
 
 public class LambertFragmentShaderFragment extends AShader implements IShaderFragment {

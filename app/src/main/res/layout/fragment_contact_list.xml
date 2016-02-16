@@ -5,9 +5,19 @@
     tools:context="izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment">
 
     <ListView android:id="@android:id/list" android:layout_width="match_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/deleteAll"/>
 
     <TextView android:id="@android:id/empty" android:layout_width="match_parent"
         android:layout_height="match_parent" android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete All"
+        android:id="@+id/deleteAll"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

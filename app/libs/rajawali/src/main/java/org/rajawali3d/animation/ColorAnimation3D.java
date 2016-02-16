@@ -12,9 +12,10 @@
  */
 package org.rajawali3d.animation;
 
+import android.graphics.Color;
+
 import org.rajawali3d.ATransformable3D;
 import org.rajawali3d.Object3D;
-import android.graphics.Color;
 
 public class ColorAnimation3D extends Animation3D {
 

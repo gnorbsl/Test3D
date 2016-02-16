@@ -9,7 +9,7 @@ public enum FogType {
 
     private final int _glValue;
 
-    private FogType(int $glValue) {
+    FogType(int $glValue) {
         _glValue = $glValue;
     }
 

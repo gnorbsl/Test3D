@@ -1,9 +1,10 @@
 package org.rajawali3d.materials.plugins;
 
+import android.opengl.GLES20;
+
 import org.rajawali3d.materials.Material.PluginInsertLocation;
 import org.rajawali3d.materials.shaders.AShader;
 import org.rajawali3d.materials.shaders.IShaderFragment;
-import android.opengl.GLES20;
 
 
 public class DepthMaterialPlugin implements IMaterialPlugin {

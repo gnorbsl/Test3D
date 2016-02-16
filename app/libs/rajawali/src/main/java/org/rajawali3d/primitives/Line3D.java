@@ -15,10 +15,10 @@ package org.rajawali3d.primitives;
 import android.graphics.Color;
 import android.opengl.GLES20;
 
-import java.util.Stack;
-
 import org.rajawali3d.Object3D;
 import org.rajawali3d.math.vector.Vector3;
+
+import java.util.Stack;
 
 /**
  * The Line3D takes a list of Vector3 points, thickness and a color.

@@ -1,10 +1,10 @@
 package org.rajawali3d.animation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Animation extends Playable {
 

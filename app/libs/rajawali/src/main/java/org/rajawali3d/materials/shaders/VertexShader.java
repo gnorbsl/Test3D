@@ -20,7 +20,6 @@ import org.rajawali3d.materials.Material.PluginInsertLocation;
 import org.rajawali3d.materials.plugins.SkeletalAnimationMaterialPlugin.SkeletalAnimationShaderVar;
 import org.rajawali3d.materials.shaders.fragments.animation.SkeletalAnimationVertexShaderFragment;
 import org.rajawali3d.math.Matrix4;
-import org.rajawali3d.util.RajLog;
 
 import java.util.List;
 

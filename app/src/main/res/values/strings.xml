@@ -14,8 +14,8 @@
 
         <string-array
             name="bondInfos">
-            <item>Ø 125 µm</item>
-            <item>Ø 400 µm</item>
+            <item>125</item>
+            <item>400</item>
         </string-array>
 
 </resources>

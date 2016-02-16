@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 
 import izm.fraunhofer.de.phoffmn.test3d.R;
 
@@ -78,9 +75,6 @@ public class ContactListAdapter extends ArrayAdapter{
                 holder.businessCard = (ImageView)convertView.findViewById(R.id.businesscard);
                 holder.additionalInformation = (TextView) convertView.findViewById(R.id.add_info_textview_image_contact);
 
-                holder.checkbox1 = (CheckBox)convertView.findViewById(R.id.image_check1);
-                holder.checkbox2 = (CheckBox)convertView.findViewById(R.id.image_check2);
-                holder.checkbox3 = (CheckBox)convertView.findViewById(R.id.image_check3);
 
             } else {
                 convertView = LayoutInflater.from(context).inflate(R.layout.contact_item, parent, false);
@@ -92,13 +86,18 @@ public class ContactListAdapter extends ArrayAdapter{
 
                 holder.additionalInformation = (TextView) convertView.findViewById(R.id.add_info_textview_contact);
 
-                holder.checkbox1 = (CheckBox)convertView.findViewById(R.id.contact_check1);
-                holder.checkbox2 = (CheckBox)convertView.findViewById(R.id.contact_check2);
-                holder.checkbox3 = (CheckBox)convertView.findViewById(R.id.contact_check3);
             }
+
+            holder.checkbox1 = (CheckBox)convertView.findViewById(R.id.contact_check1);
+            holder.checkbox2 = (CheckBox)convertView.findViewById(R.id.contact_check2);
+            holder.checkbox3 = (CheckBox)convertView.findViewById(R.id.contact_check3);
+            holder.checkbox4 = (CheckBox)convertView.findViewById(R.id.contact_check4);
+            holder.checkbox5 = (CheckBox)convertView.findViewById(R.id.contact_check5);
+
 
 
             convertView.setTag(holder);
+
 
 
         } else {
@@ -172,6 +171,8 @@ public class ContactListAdapter extends ArrayAdapter{
             holder.checkbox1.setChecked(contact.getBoolean("checkbox1"));
             holder.checkbox2.setChecked(contact.getBoolean("checkbox2"));
             holder.checkbox3.setChecked(contact.getBoolean("checkbox3"));
+            holder.checkbox4.setChecked(contact.getBoolean("checkbox4"));
+            holder.checkbox5.setChecked(contact.getBoolean("checkbox5"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -188,6 +189,6 @@ public class ContactListAdapter extends ArrayAdapter{
         TextView additionalInformation;
 
         TextView name, company, email, telephone;
-        CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6;
+        CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5;
     }
 }

@@ -15,13 +15,6 @@ package org.rajawali3d.loader.md5;
 import android.content.res.Resources;
 import android.opengl.GLES20;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-
 import org.rajawali3d.animation.mesh.AAnimationObject3D;
 import org.rajawali3d.animation.mesh.SkeletalAnimationChildObject3D;
 import org.rajawali3d.animation.mesh.SkeletalAnimationChildObject3D.BoneVertex;
@@ -29,6 +22,9 @@ import org.rajawali3d.animation.mesh.SkeletalAnimationChildObject3D.BoneWeight;
 import org.rajawali3d.animation.mesh.SkeletalAnimationFrame.SkeletonJoint;
 import org.rajawali3d.animation.mesh.SkeletalAnimationObject3D;
 import org.rajawali3d.animation.mesh.SkeletalAnimationObject3D.SkeletalAnimationException;
+import org.rajawali3d.loader.AMeshLoader;
+import org.rajawali3d.loader.IAnimatedMeshLoader;
+import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.materials.Material;
 import org.rajawali3d.materials.methods.DiffuseMethod;
 import org.rajawali3d.materials.plugins.SkeletalAnimationMaterialPlugin;
@@ -37,11 +33,15 @@ import org.rajawali3d.materials.textures.Texture;
 import org.rajawali3d.materials.textures.TextureManager;
 import org.rajawali3d.math.Matrix;
 import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.loader.AMeshLoader;
-import org.rajawali3d.loader.IAnimatedMeshLoader;
-import org.rajawali3d.loader.ParsingException;
 import org.rajawali3d.renderer.RajawaliRenderer;
 import org.rajawali3d.util.RajLog;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class LoaderMD5Mesh extends AMeshLoader implements IAnimatedMeshLoader {
 

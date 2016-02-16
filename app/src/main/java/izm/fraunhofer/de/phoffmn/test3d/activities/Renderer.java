@@ -8,12 +8,8 @@ import android.view.MotionEvent;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.cameras.ArcballCamera;
-import org.rajawali3d.lights.PointLight;
 import org.rajawali3d.loader.LoaderOBJ;
 import org.rajawali3d.loader.ParsingException;
-import org.rajawali3d.materials.Material;
-import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.primitives.Sphere;
 import org.rajawali3d.renderer.RajawaliRenderer;
 
 import izm.fraunhofer.de.phoffmn.test3d.R;
@@ -47,10 +43,12 @@ public class Renderer extends RajawaliRenderer {
 
 
 
-        int objId = context.getResources().getIdentifier("raw/" + objName + "_obj",
+        int objId = context.getResources().getIdentifier("raw/bond" + objName + "_obj",
                 "raw", context.getPackageName());
 
         LoaderOBJ objParser = new LoaderOBJ(context.getResources(), mTextureManager, objId);
+
+
 
 
 
@@ -77,14 +75,6 @@ public class Renderer extends RajawaliRenderer {
         } catch (ParsingException e) {
             e.printStackTrace();
         }
-
-        Sphere s = new Sphere(0.01f,5,5);
-
-        s.setMaterial(new Material());
-        getCurrentScene().addChild(s);
-
-
-
 
         arcball.setTarget(mObjectGroup);
 

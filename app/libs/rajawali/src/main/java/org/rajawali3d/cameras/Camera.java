@@ -18,7 +18,6 @@ import org.rajawali3d.bounds.IBoundingVolume;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.Quaternion;
 import org.rajawali3d.math.vector.Vector3;
-import org.rajawali3d.util.RajLog;
 
 public class Camera extends ATransformable3D {
 

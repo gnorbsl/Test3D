@@ -16,9 +16,9 @@
 
 package org.rajawali3d.util;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.rajawali3d.math.Matrix;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * NOTE: This class taken from Android Open Source Project source code

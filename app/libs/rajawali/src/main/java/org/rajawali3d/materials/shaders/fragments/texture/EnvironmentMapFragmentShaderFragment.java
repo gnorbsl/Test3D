@@ -14,10 +14,15 @@ package org.rajawali3d.materials.shaders.fragments.texture;
 
 import java.util.List;
 
-import org.rajawali3d.materials.Material.PluginInsertLocation;
-import org.rajawali3d.materials.shaders.IShaderFragment;
-import org.rajawali3d.materials.textures.ATexture;
-import org.rajawali3d.materials.textures.ATexture.TextureType;
+import org.rajawali3d.materials.Materi
+l.Plug nInsertLocation;
+import org.rajawali3d.materials.
+haders IShaderFragment;
+import org.rajawali3d.mate
+ials.t xtures.ATexture;
+import org.rajawali3d.materials.textur
+
+.AText re.TextureType;
 
 
 public class EnvironmentMapFragmentShaderFragment extends ATextureFragmentShaderFragment implements IShaderFragment {

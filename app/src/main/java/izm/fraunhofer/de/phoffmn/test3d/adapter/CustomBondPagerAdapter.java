@@ -20,8 +20,8 @@ public class CustomBondPagerAdapter extends PagerAdapter {
     int[] mResources;
 
     int[] mResourcesBond = {
-            R.drawable.wire_125_new_small,
-            R.drawable.wire_400_new_small
+            R.drawable.wire_125_new_small2,
+            R.drawable.wire_400_new_small2
     };
 
     int[] mResourcesCooler = {

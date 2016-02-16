@@ -13,7 +13,7 @@ public enum RenderType {
 
     private final int _glValue;
 
-    private RenderType(int $glValue) {
+    RenderType(int $glValue) {
         _glValue = $glValue;
     }
 

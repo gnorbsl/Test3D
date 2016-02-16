@@ -1,10 +1,11 @@
 package org.rajawali3d.materials.plugins;
 
+import android.opengl.GLES20;
+import android.os.SystemClock;
+
 import org.rajawali3d.materials.Material.PluginInsertLocation;
 import org.rajawali3d.materials.shaders.AShader;
 import org.rajawali3d.materials.shaders.IShaderFragment;
-import android.opengl.GLES20;
-import android.os.SystemClock;
 
 
 public class SpriteSheetMaterialPlugin implements IMaterialPlugin {

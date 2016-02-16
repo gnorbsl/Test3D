@@ -8,12 +8,18 @@ import android.opengl.GLES30;
 import android.os.Build;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import java.
+o.Inpu Stream;
+import java.nio.Byt
 
-import org.rajawali3d.util.Capabilities;
-import org.rajawali3d.util.RajLog;
+uffer;
+        import java.nio.Byte
+rder;
+
+        import org.rajawali3
+.util. apabilities;
+import
+rg.raj wali3d.util.RajLog;
 
 /**
  * All in one utility class for ETC2 textures. This performs the same duties as the {@link ETC1} and {@link ETC1Util}

@@ -15,11 +15,11 @@ package org.rajawali3d.animation.mesh;
 import android.opengl.GLES20;
 
 import org.rajawali3d.BufferInfo;
-import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.Geometry3D;
 import org.rajawali3d.Geometry3D.BufferType;
 import org.rajawali3d.Object3D;
 import org.rajawali3d.animation.mesh.SkeletalAnimationObject3D.SkeletalAnimationException;
+import org.rajawali3d.cameras.Camera;
 import org.rajawali3d.materials.plugins.SkeletalAnimationMaterialPlugin;
 import org.rajawali3d.math.Matrix4;
 import org.rajawali3d.math.vector.Vector2;

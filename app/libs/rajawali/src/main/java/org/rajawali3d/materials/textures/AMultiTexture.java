@@ -12,11 +12,11 @@
  */
 package org.rajawali3d.materials.textures;
 
-import java.nio.ByteBuffer;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import java.nio.ByteBuffer;
 
 
 public abstract class AMultiTexture extends ATexture {

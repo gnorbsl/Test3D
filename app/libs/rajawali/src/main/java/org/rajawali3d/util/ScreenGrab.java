@@ -12,16 +12,15 @@
  */
 package org.rajawali3d.util;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.opengl.GLES20;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.IntBuffer;
-
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.opengl.GLES20;
-import android.os.Environment;
 
 /**
  * Grabs the pixels from the buffer and saves it to a file on the SD card.

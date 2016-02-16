@@ -1,64 +1,53 @@
 package izm.fraunhofer.de.phoffmn.test3d.activities;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
+
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import izm.fraunhofer.de.phoffmn.test3d.R;
 import izm.fraunhofer.de.phoffmn.test3d.adapter.CustomBondPagerAdapter;
 import izm.fraunhofer.de.phoffmn.test3d.adapter.TestAdapter;
+import izm.fraunhofer.de.phoffmn.test3d.fragments.ContactListFragment;
+import izm.fraunhofer.de.phoffmn.test3d.helper.Tools;
 
 public class StartActivity extends AppCompatActivity {
 
 
     //TODO add constant class
     public static final String BOND_DIAMETER = "bond_diameter";
-    private static final String TAG = "StartActivity";
-    @Bind(R.id.button100)
-    Button button100;
+    public static final String TAG = "StartActivity";
+    public static final String COOLER_TYPE = "cooler_type";
+    public static final String T_AMBIENT = "t_ambient";
+    int realPosition;
 
-
-
-    @OnClick(R.id.button100)
-    public void click100() {
-        Intent intent = new Intent(StartActivity.this, MainActivity.class);
-        intent.putExtra(BOND_DIAMETER, "guidetest");
-        startActivity(intent);
-    }
-
-
-    @Bind(R.id.button20)
-    Button button20;
-    @OnClick(R.id.button20)
-    public void click20() {
-        Intent intent = new Intent(StartActivity.this, MainActivity.class);
-        intent.putExtra(BOND_DIAMETER, "hopethisworks");
-        startActivity(intent);
-    }
+    @Bind(R.id.mainView)
+    View mainView;
 
     @Bind(R.id.bondPager)
     InfiniteViewPager bondPager;
 
     @Bind(R.id.coolerPager)
     InfiniteViewPager coolerPager;
-
 
 
     private PagerAdapter mCustomBondPagerAdapter;
@@ -89,6 +78,15 @@ public class StartActivity extends AppCompatActivity {
     @Bind(R.id.startLifetime)
     Button startLifeTime;
 
+    @Bind(R.id.aluminium)
+    TextView aluminium;
+
+    @Bind(R.id.copper)
+    TextView copper;
+
+
+    private int counter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +105,7 @@ public class StartActivity extends AppCompatActivity {
         TestAdapter wrappedAdapter = new TestAdapter(mCustomBondPagerAdapter);
         bondPager.setAdapter(wrappedAdapter);
 
-
+        bondInfo.setText("Ø " + infos[0] + " µm");
 
         bondPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -118,9 +116,11 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-                int realPosition = position % wrappedAdapter.getRealCount();
 
-                bondInfo.setText(infos[realPosition]);
+                realPosition = position % wrappedAdapter.getRealCount();
+
+
+                bondInfo.setText("Ø " + infos[realPosition] + " µm");
 
             }
 
@@ -179,6 +179,7 @@ public class StartActivity extends AppCompatActivity {
 
 
 
+
         leftButtonCooler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +214,55 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+
+        startLifeTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startCalculationIntent = new Intent(StartActivity.this, MainActivity.class);
+                startCalculationIntent.putExtra(BOND_DIAMETER, infos[realPosition])
+                        .putExtra(COOLER_TYPE, coolerInfo.getText().toString().split(" ")[0])
+                        .putExtra(T_AMBIENT, currentTemp.getText().toString());
+                startActivity(startCalculationIntent);
+            }
+        });
+
+        aluminium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter++;
+                if (counter > 3) {
+                    Toast.makeText(StartActivity.this, "" + counter, Toast.LENGTH_SHORT).show();
+                }
+                Log.d(TAG, "onClick counter" + counter);
+            }
+        });
+
+        copper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (counter == 5) {
+                    Log.d(TAG, "onClick TEST");
+                    Map<String, ?> prefEntries = Tools.getPreferences(StartActivity.this).getAll();
+
+                    String[] contacts = new String[prefEntries.size()];
+
+                    int i = 0;
+
+                    for (Map.Entry<String, ?> entry : prefEntries.entrySet()) {
+
+                        contacts[i] = entry.getValue().toString();
+                        i++;
+                    }
+
+                    DialogFragment newFragment = ContactListFragment.newInstance(contacts);
+                    newFragment.show(createFragmentTransaction("list_dialog"), "list_dialog");
+                }
+                counter = 0;
+            }
+        });
+
+
+
     }
 
     @Override
@@ -237,5 +287,33 @@ public class StartActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            mainView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+    }
 
+    private FragmentTransaction createFragmentTransaction(String fragmentName) {
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag(fragmentName);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+
+        ft.addToBackStack(null);
+        return ft;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

@@ -12,11 +12,11 @@
  */
 package org.rajawali3d.scenegraph;
 
-import java.util.Collections;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.util.RajLog;
+
+import java.util.Collections;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**

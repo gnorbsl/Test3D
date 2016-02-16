@@ -12,10 +12,10 @@
  */
 package org.rajawali3d.postprocessing;
 
+import org.rajawali3d.renderer.RajawaliRenderer;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.rajawali3d.renderer.RajawaliRenderer;
 
 
 public abstract class APostProcessingEffect implements IPostProcessingEffect {

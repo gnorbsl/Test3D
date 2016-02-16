@@ -16,11 +16,6 @@
  */
 
 package org.rajawali3d.materials.textures;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import org.rajawali3d.util.RajLog;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -28,6 +23,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import org.rajawali3d.util.RajLog;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @author David Trounstine (david@evvid.com)

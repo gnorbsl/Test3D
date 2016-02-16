@@ -9,7 +9,7 @@ public enum ShadeModel {
 
     private final int _glConstant;
 
-    private ShadeModel(int $glConstant) {
+    ShadeModel(int $glConstant) {
         _glConstant = $glConstant;
     }
 

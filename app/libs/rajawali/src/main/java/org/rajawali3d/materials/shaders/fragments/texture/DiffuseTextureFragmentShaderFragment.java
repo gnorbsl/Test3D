@@ -14,10 +14,15 @@ package org.rajawali3d.materials.shaders.fragments.texture;
 
 import java.util.List;
 
-import org.rajawali3d.materials.Material.PluginInsertLocation;
-import org.rajawali3d.materials.textures.ATexture;
-import org.rajawali3d.materials.textures.ATexture.TextureType;
-import org.rajawali3d.materials.textures.ATexture.WrapType;
+import org.rajawali3d.materials.Materi
+l.Plug nInsertLocation;
+import org.rajawali3d.mate
+ials.t xtures.ATexture;
+import org.rajawali3d.materials.textur
+s.ATex ure.TextureType;
+import org.rajawali3d.materials.tex
+
+res.AT xture.WrapType;
 
 
 public class DiffuseTextureFragmentShaderFragment extends ATextureFragmentShaderFragment {

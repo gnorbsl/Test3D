@@ -13,8 +13,8 @@ import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 
-import org.rajawali3d.util.Capabilities;
 import org.rajawali3d.R;
+import org.rajawali3d.util.Capabilities;
 import org.rajawali3d.util.egl.RajawaliEGLConfigChooser;
 
 import java.lang.ref.WeakReference;

@@ -12,13 +12,14 @@
  */
 package org.rajawali3d.terrain;
 
-import org.rajawali3d.math.vector.Vector3;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+
+import org.rajawali3d.math.vector.Vector3;
 
 /**
  * Is a Factory Class to generate Terrain

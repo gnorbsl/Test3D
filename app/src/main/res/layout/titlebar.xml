@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/fraunhoferlogotransparent"/>
+
+    <ImageView
+        android:id="@+id/tulogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/tulogo"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/logo"
+        android:layout_toStartOf="@id/logo"/>
+
+    <ImageView
+        android:id="@+id/ninepatch"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ninepatch"
+        android:layout_marginTop="16dp" />
+
+
+</RelativeLayout>

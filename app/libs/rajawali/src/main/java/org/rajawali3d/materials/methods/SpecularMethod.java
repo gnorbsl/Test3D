@@ -12,16 +12,17 @@
  */
 package org.rajawali3d.materials.methods;
 
-import java.util.List;
+import android.graphics.Color;
 
 import org.rajawali3d.lights.ALight;
 import org.rajawali3d.materials.Material;
-import org.rajawali3d.materials.shaders.IShaderFragment;
 import org.rajawali3d.materials.shaders.AShaderBase.DataType;
 import org.rajawali3d.materials.shaders.AShaderBase.IGlobalShaderVar;
+import org.rajawali3d.materials.shaders.IShaderFragment;
 import org.rajawali3d.materials.shaders.fragments.specular.PhongFragmentShaderFragment;
 import org.rajawali3d.materials.textures.ATexture;
-import android.graphics.Color;
+
+import java.util.List;
 
 
 /**

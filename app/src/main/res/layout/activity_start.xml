@@ -4,15 +4,23 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="izm.fraunhofer.de.phoffmn.test3d.activities.StartActivity">
+    tools:context="izm.fraunhofer.de.phoffmn.test3d.activities.StartActivity"
+    android:background="@color/black"
+    android:id="@+id/mainView">
 
+    <include android:id="@+id/titlebar"
+        layout="@layout/titlebar"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
 
 
     <com.antonyt.infiniteviewpager.InfiniteViewPager
         android:id="@+id/bondPager"
         android:layout_width="500dp"
         android:layout_height="90dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/titlebar">
     </com.antonyt.infiniteviewpager.InfiniteViewPager>
 
     <ImageButton
@@ -32,7 +40,7 @@
         android:id="@+id/rightButton"
         android:layout_alignRight="@id/bondPager"
         android:layout_alignEnd="@id/bondPager"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="64dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/navigation_imagebutton_selector"
         android:src="@drawable/ic_arrow_forward_white_36dp" />
@@ -75,24 +83,6 @@
         android:layout_alignLeft="@+id/rightButton"
         android:layout_alignStart="@+id/rightButton" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Bond 100"
-        android:visibility="gone"
-        android:id="@+id/button100"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Bond 20"
-        android:visibility="gone"
-        android:id="@+id/button20"
-        android:layout_below="@+id/button100"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,9 +90,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Materials:"
         android:id="@+id/materials"
-        android:layout_alignTop="@+id/button100"
         android:layout_toRightOf="@+id/bondPager"
-        android:layout_toEndOf="@+id/bondPager" />
+        android:layout_toEndOf="@+id/bondPager"
+        android:layout_below="@id/titlebar"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -131,7 +121,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Aluminium"
-        android:id="@+id/textView10"
+        android:id="@+id/aluminium"
         android:layout_alignTop="@+id/rightButtonCooler"
         android:layout_alignLeft="@+id/textView13"
         android:layout_alignStart="@+id/textView13"
@@ -142,7 +132,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Copper"
-        android:id="@+id/textView11"
+        android:id="@+id/copper"
         android:layout_below="@+id/textView9"
         android:layout_alignLeft="@+id/textView9"
         android:layout_alignStart="@+id/textView9"
@@ -166,9 +156,9 @@
         android:text="Copper"
         android:id="@+id/textView13"
         android:layout_marginTop="59dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_alignStart="@+id/textView11" />
+        android:layout_below="@+id/copper"
+        android:layout_alignLeft="@+id/copper"
+        android:layout_alignStart="@+id/copper" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -176,7 +166,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Ceramics"
         android:id="@+id/textView14"
-        android:layout_below="@+id/textView11"
+        android:layout_below="@+id/copper"
         android:layout_alignLeft="@+id/textView13"
         android:layout_alignStart="@+id/textView13"
         android:layout_marginTop="17dp" />
@@ -188,14 +178,15 @@
         android:id="@+id/bondInfo"
         android:layout_alignTop="@+id/leftButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/coolerInfo"
-        android:layout_alignBottom="@+id/textView10"
+        android:layout_alignBottom="@+id/aluminium"
         android:layout_alignLeft="@+id/bondInfo"
         android:layout_alignStart="@+id/bondInfo" />
 
@@ -262,8 +253,8 @@
         android:text="20°C"
         android:gravity="center_vertical"
         android:layout_above="@+id/textView16"
-        android:layout_alignLeft="@+id/textView10"
-        android:layout_alignStart="@+id/textView10"
+        android:layout_alignLeft="@+id/aluminium"
+        android:layout_alignStart="@+id/aluminium"
         android:layout_alignTop="@+id/tambientSeekBar" />
 
     <TextView
@@ -284,8 +275,8 @@
         android:text="Start Lifetime Calculation"
         android:id="@+id/startLifetime"
         android:layout_below="@+id/textView16"
-        android:layout_alignRight="@+id/textView10"
-        android:layout_alignEnd="@+id/textView10"
+        android:layout_alignRight="@+id/aluminium"
+        android:layout_alignEnd="@+id/aluminium"
         android:layout_marginTop="78dp"
         android:padding="5dp"
         android:background="@drawable/resetbuttondrawable"/>
